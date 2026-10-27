@@ -1,5 +1,8 @@
 <template>
-  <div class="eventspane container">
+  <div
+    v-if="loading || events.length > 0"
+    class="eventspane container"
+  >
     <div class="md-headline">
       <h5>Upcoming AEC Industry Events</h5>
       <div class="more-link">
@@ -118,6 +121,9 @@ export default {
           this.specialEvent = spec
           this.loading = false
     })
+      .catch(() => {
+        this.loading = false
+      })
   },
   methods:{
     show_event(nid){
