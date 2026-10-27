@@ -1,0 +1,1440 @@
+<?php
+
+/**
+ * Implements hook_services_resources().
+ */
+function custom_services_services_resources(){
+	return array(
+	    'page' => array(
+	        'operations' => array(
+	            'retrieve' => array(
+                    'help' => 'Return a page data',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'page_resource'),
+                    'callback' => 'page_resource_retrieve',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'nid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'The uid of the user',
+                        ),
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'parameter of page',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                    )
+                )
+            ),
+            'actions' => array(
+                'contact_form' => array(
+                    'help' => 'Contact us form page',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'page_resource'),
+                    'callback' => 'page_resource_contact_form',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'The data of request.',
+                            'source' => 'data',
+                            'optional' => False,
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'user' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Return user`s data',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_retrieve',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'uid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'The uid of the user',
+                        ),
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                    ),
+                ),
+                'update' => array(
+                    'help' => 'Update a user',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_update_data',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'data',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            'description' => 'The profile data to update',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'uid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'The uid of the user',
+                        ),
+                    ),
+                ),
+            ),
+            'actions' => array(
+                'login' => array(
+                    'help' => 'Login a user for a new session',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_login',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'The data of request.',
+                            'source' => 'data',
+                            'optional' => False,
+                        ),
+                    ),
+                ),
+                'register' => array(
+                    'help' => 'Create a new user',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_register',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'The hash of url.',
+                            'source' => 'data',
+                            'optional' => False,
+                        ),
+                    ),
+                ),
+                'password_reset' => array(
+                    'help' => 'reset password',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_reset_password_request',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'User data',
+                            'source' => 'data',
+                            'optional' => FALSE,
+                        ),
+                    ),
+                ),
+                'login_with_link' => array(
+                    'help' => 'check the validation of url token',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_url_token_result',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'User data',
+                            'source' => 'data',
+                            'optional' => FALSE,
+                        ),
+                    ),
+                ),
+                'exist' => array(
+                    'help' => 'Check user is exist or not!',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_exist',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'User data',
+                            'source' => 'data',
+                            'optional' => FALSE,
+                        ),
+                    ),
+                ),
+                'interests' => array(
+                    'help' => 'insert the topics that user is interested in',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_insert_interests',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'Data of request.',
+                            'source' => "data",
+                            'optional' => False,
+                        ),
+                    ),
+                )
+            ),
+            'relationships' => array(
+                'nav_bar_info' => array(
+                    'help' => 'Return user`s data for nav bar',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_nav_bar_info',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'login',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'string',
+                            'description' => 'Just for create url',
+                        ),
+                    ),
+                ),
+                'posts' => array(
+                    'help' => 'Return user`s posts',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_posts',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'uid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'user id',
+                        ),
+                    ),
+                ),
+                'following' => array(
+                    'help' => 'Return user`s following',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_following',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'uid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'user id',
+                        ),
+                    ),
+                ),
+                'follower' => array(
+                    'help' => 'Return user`s follower',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_follower',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'uid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'user id',
+                        ),
+                    ),
+                ),
+                'following_tag' => array(
+                    'help' => 'Return users`s tags following',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_following_tags',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'uid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'user id',
+                        ),
+                    ),
+                ),
+                'bookmark' => array(
+                    'help' => 'Return user`s bookmarks',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_bookmarks',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'uid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'user id',
+                        ),
+                    ),
+                ),
+                'favorite_content' => array(
+                    'help' => 'Return the contents that are liked by user',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_favorite_content',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'uid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'user id',
+                        ),
+                    ),
+                ),
+                'favorite_comment' => array(
+                    'help' => 'Return the comments that are liked by user',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_favorite_comments',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'uid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'user id',
+                        ),
+                    ),
+                ),
+                'wrote_comment' => array(
+                    'help' => 'Return the comments that user wrote them',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_wrote_comments',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'uid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'user id',
+                        ),
+                    ),
+                ),
+                'linkedin' => array(
+                    'help' => 'Return the comments that user wrote them',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'user_resource'),
+                    'callback' => 'user_resource_linkedin_profile',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'uid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'user id',
+                        ),
+                    ),
+                ),
+            ),
+            'targeted_actions' => array(
+                'follow' => array(
+                    'help' => 'follow or unfollow a user',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'flag_resource'),
+                    'callback' => 'flag_resource_user_follow',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'uid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'user id',
+                        ),
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'Data of request.',
+                            'source' => "data",
+                            'optional' => False,
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'contents' => array(
+            'operations' => array(
+                'index' => array(
+                    'help' => 'return all contents',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'contents_resource'),
+                    'callback' => 'contents_resource_index',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                    ),
+                ),
+                'retrieve' => array(
+                    'help' => 'return a content',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'contents_resource'),
+                    'callback' => 'contents_resource_retrieve',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'nid',
+                            'type' => 'int',
+                            'description' => 'Nid of content',
+                            'source' => array('path' => 0),
+                            'optional' => FALSE,
+                        ),
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                    ),
+                ),
+                'create' => array(
+                    'help' => 'create a content',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'contents_resource'),
+                    'callback' => 'contents_resource_create',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => 'data',
+                            'optional' => False,
+                        ),
+                    ),
+                ),
+                'update' => array(
+                    'help' => 'update a content',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'contents_resource'),
+                    'callback' => 'contents_resource_update',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'nid',
+                            'type' => 'int',
+                            'description' => 'nid for update.',
+                            'source' => array("path" => 0),
+                            'optional' => False,
+                        ),
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'data of request.',
+                            'source' => 'data',
+                            'optional' => False,
+                        ),
+                    ),
+                ),
+                'delete' => array(
+                    'help' => 'delete a content',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'contents_resource'),
+                    'callback' => 'contents_resource_delete',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'nid',
+                            'type' => 'int',
+                            'description' => 'nid for update.',
+                            'source' => array("path" => 0),
+                            'optional' => False,
+                        ),
+                    ),
+                )
+            ),
+            'actions' => array(
+
+            ),
+            'relationships' => array(
+                'filters' => array(
+                    'help' => 'return filters of a content type',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'contents_resource'),
+                    'callback' => 'contents_resource_filters',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'url',
+                            'type' => 'string',
+                            'description' => 'Just use for url address.',
+                            'source' => array('path' => 0),
+                            'optional' => False,
+                            'default' => "all"
+                        ),
+                    ),
+                ),
+                'topics' => array(
+                    'help' => 'return filters of a content type',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'contents_resource'),
+                    'callback' => 'contents_resource_topics',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'url',
+                            'type' => 'string',
+                            'description' => 'Just use for url address.',
+                            'source' => array('path' => 0),
+                            'optional' => False,
+                            'default' => "list"
+                        ),
+                    ),
+                ),
+                'event' => array(
+                    'help' => 'Return new event list',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'contents_resource'),
+                    'callback' => 'content_resource_event_list',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'parameter of api',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'url',
+                            'type' => 'string',
+                            'description' => 'Just use for url address.',
+                            'source' => array('path' => 0),
+                            'optional' => False,
+                        ),
+                    )
+                ),
+                'services' => array(
+                    'help' => 'Return list of services',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'contents_resource'),
+                    'callback' => 'content_resource_services_list',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'parameter of api',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'url',
+                            'type' => 'string',
+                            'description' => 'Just use for url address.',
+                            'source' => array('path' => 0),
+                            'optional' => False,
+                        ),
+                    )
+                ),
+                'comments' => array(
+                    'help' => 'Return comments',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'contents_resource'),
+                    'callback' => 'content_resource_comments',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'parameter of api',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'nid',
+                            'type' => 'int',
+                            'description' => 'nid for list of comments',
+                            'source' => array('path' => 0),
+                            'optional' => False,
+                        ),
+                    )
+                ),
+                'relative' => array(
+                    'help' => 'Return relative nodes',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'contents_resource'),
+                    'callback' => 'content_resource_relatives',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'parameter of api',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'nid',
+                            'type' => 'int',
+                            'description' => 'nid for list of comments',
+                            'source' => array('path' => 0),
+                            'optional' => False,
+                        ),
+                    )
+                ),
+                'interest' => array(
+                    'help' => 'Return nodes that users are intrested in',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'contents_resource'),
+                    'callback' => 'content_resource_user_interest',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'parameter of api',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'url',
+                            'type' => 'string',
+                            'description' => 'url of the request',
+                            'source' => array('path' => 0),
+                            'optional' => True,
+                            'default' => 'user'
+                        ),
+                    )
+                ),
+            ),
+            'targeted_actions' => array(
+                'bookmark' => array(
+                    'help' => 'bookmark or unbookmark a content',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'flag_resource'),
+                    'callback' => 'flag_resource_content_bookmark',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'nid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'content id',
+                        ),
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'Data of request.',
+                            'source' => "data",
+                            'optional' => False,
+                        ),
+                    ),
+                ),
+                'clap' => array(
+                    'help' => 'clapping a content',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'vote_resource'),
+                    'callback' => 'vote_resource_clap_content',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'nid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'content id',
+                        ),
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'Data of request.',
+                            'source' => "data",
+                            'optional' => False,
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'tag' => array(
+            'operations' => array(
+                'index' => array(
+                    'help' => 'return all tags',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'tag_resource'),
+                    'callback' => 'tag_resource_index',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                    ),
+                ),
+                'retrieve' => array(
+                    'help' => 'return a tag information',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'tag_resource'),
+                    'callback' => 'tag_resource_retrieve',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'tid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'The tid of the tag',
+                        ),
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                    ),
+                ),
+            ),
+            'relationships' => array(
+                'list' => array(
+                    'help' => 'Return new event list',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'tag_resource'),
+                    'callback' => 'tag_resource_list',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'parameter of api',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'url',
+                            'type' => 'string',
+                            'description' => 'Just use for url address.',
+                            'source' => array('path' => 0),
+                            'optional' => False,
+                        ),
+                    )
+                ),
+                'follower' => array(
+                    'help' => 'Return new event list',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'tag_resource'),
+                    'callback' => 'tag_resource_followers',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'parameter of api',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'tid',
+                            'type' => 'int',
+                            'description' => 'tid of the tag',
+                            'source' => array('path' => 0),
+                            'optional' => False,
+                        ),
+                    )
+                )
+            ),
+            'targeted_actions' => array(
+                'follow' => array(
+                    'help' => 'follow or undollow a tag',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'flag_resource'),
+                    'callback' => 'flag_resource_tag_follow',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'tid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'tag id',
+                        ),
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'Data of request.',
+                            'source' => "data",
+                            'optional' => False,
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'comments' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'create a comment',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'comment_resource'),
+                    'callback' => 'comment_resource_create',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'The data for create',
+                            'source' => 'data',
+                            'optional' => FALSE,
+                        )
+                    ),
+                ),
+                'update' => array(
+                    'help' => 'update a comment',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'comment_resource'),
+                    'callback' => 'comment_resource_update',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'cid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'The cid of the comment to for edit',
+                        ),
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'The data for update',
+                            'source' => 'data',
+                            'optional' => FALSE,
+                        )
+                    ),
+                ),
+                'delete' => array(
+                    'help' => t('Delete a comment'),
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'comment_resource'),
+                    'callback' => 'comment_resource_delete',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'cid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'The cid of the comment to delete',
+                        ),
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'The data for delete',
+                            'source' => 'data',
+                            'optional' => FALSE,
+                        )
+                    ),
+                ),
+            ),
+            'targeted_actions' => array(
+                'like' => array(
+                    'help' => 'clapping a content',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'vote_resource'),
+                    'callback' => 'vote_resource_like_comment',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'cid',
+                            'optional' => FALSE,
+                            'source' => array('path' => 0),
+                            'type' => 'int',
+                            'description' => 'comment id',
+                        ),
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'Data of request.',
+                            'source' => "data",
+                            'optional' => False,
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'file' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Upload a file with raw data.',
+                    'callback' => 'upload_file',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'The hash of url.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => False,
+                        ),
+                    ),
+                ),
+                'delete' => array(
+                    'help' => 'Delete a file with raw data.',
+                    'callback' => 'delete_file',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'fid',
+                            'type' => 'int',
+                            'description' => 'fid for deleting',
+                            'source' => array('path' => 0),
+                            'optional' => False,
+                        ),
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'The hash of url.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => False,
+                        ),
+                    ),
+                ),
+            ),
+          'actions'=>array(
+            'upload_image' => array(
+              'help' => 'upload images for users` post',
+              'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'contents_resource'),
+              'callback' => 'contents_resource_upload_image',
+              'access callback' => 'user_access',
+              'access arguments' => array('access content'),
+              'access arguments append' => FALSE,
+              'args' => array(
+                array(
+                  'name' => 'parameter',
+                  'type' => 'array',
+                  'description' => 'The hash of url.',
+                  'source' => array('param' => 'parameter'),
+                  'optional' => True,
+                ),
+              ),
+            ),
+            'delete_image' => array(
+              'help' => 'delete an image',
+              'callback' => 'delete_image',
+              'access callback' => 'user_access',
+              'access arguments' => array('access content'),
+              'access arguments append' => FALSE,
+              'args' => array(
+
+                array(
+                  'name' => 'data',
+                  'type' => 'array',
+                  'description' => 'Parameters.',
+                  'source' => "data",
+                  'optional' => True,
+                ),
+              ),
+            ),
+          )
+        ),
+        'web_form' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Fill the web forms',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'web_form_resource'),
+                    'callback' => 'web_form_resource_create',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'The data of request.',
+                            'source' => 'data',
+                            'optional' => False,
+                        ),
+
+                    ),
+                )
+            )
+        ),
+        'linkedin' => array(
+            'actions' => array(
+                'login' => array(
+                    'help' => 'Login a user with linkedin',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'linkedin_resource'),
+                    'callback' => 'linkedin_resource_login',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'The data of request.',
+                            'source' => 'data',
+                            'optional' => False,
+                        ),
+                    ),
+                ),
+                'register' => array(
+                    'help' => 'Register a user with linkedin',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'linkedin_resource'),
+                    'callback' => 'linkedin_resource_register',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'The hash of url.',
+                            'source' => 'data',
+                            'optional' => False,
+                        ),
+                    ),
+                ),
+                'connect' => array(
+                    'help' => 'Connect a user to linkedin',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'linkedin_resource'),
+                    'callback' => 'linkedin_resource_connect',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'data',
+                            'type' => 'array',
+                            'description' => 'Data of request.',
+                            'source' => "data",
+                            'optional' => False,
+                        ),
+                    ),
+                )
+            ),
+        ),
+
+        'test' => array(
+            'operations' => array(
+                'index' => array(
+                    'help' => 'return all contents',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'test'),
+                    'callback' => 'contents_resource_index',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                        array(
+                            'name' => 'filter',
+                            'type' => 'array',
+                            'description' => 'Filters of request.',
+                            'source' => array('param' => 'filter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                    ),
+                ),
+                'create' => array(
+                    'help' => 'Upload a file with raw data.',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'hatef'),
+                    'callback' => 'upload_file_1',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+
+                ),
+
+            ),
+          'actions'=>array(
+              'add_tag'=>array(
+                'help' => 'Add tag to node.',
+                'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'hatef'),
+                'callback' => 'add_tag_1',
+                'access callback' => 'user_access',
+                'access arguments' => array('access content'),
+                'access arguments append' => FALSE,
+              )
+
+          )
+        ),
+        'intern' => array(
+            'operations' => array(
+                'index' => array(
+                    'help' => 'return all contents',
+                    'file' => array('type' => 'inc', 'module' => 'custom_services', 'name' => 'test'),
+                    'callback' => 'intern',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'parameter',
+                            'type' => 'array',
+                            'description' => 'Parameters of request.',
+                            'source' => array('param' => 'parameter'),
+                            'optional' => True,
+                            'default' => array()
+                        ),
+                    ),
+                )
+            )
+        ),
+	);
+}
+function upload_file($parameter) {
+    if(!isset($parameter["hash"]) || !(hash_true($parameter["hash"] , "file"))) return services_error(t('Failed to access'), 403);
+    global $user;
+    if($user == 0) return services_error(t('You should be login!'), 13);
+    $files =  $_FILES;
+    foreach ($files as $file_name => $file_info){
+        $_FILES["files"]["name"][$file_name] = $file_info['name'];
+        $_FILES["files"]["tmp_name"][$file_name] = $file_info['tmp_name'];
+        $_FILES["files"]["size"][$file_name] = $file_info['size'];
+        $_FILES["files"]["error"][$file_name] = $file_info['error'];
+    }
+    $files = array();
+    foreach ($_FILES['files']['name'] as $field_name => $file_name) {
+        // Sanitize the user-input file name before saving to the file system.
+        $_FILES['files']['name'][$field_name] = _services_file_check_name_extension($file_name);
+
+        $scheme = file_default_scheme();
+        // Set file validators: allowed extension
+        $validators = array();
+        if ($extensions = variable_get('services_allowed_extensions', SERVICES_ALLOWED_EXTENSIONS)) {
+            $validators['file_validate_extensions'] = $extensions;
+        }
+        $file = file_save_upload($field_name, $validators, "$scheme://");
+
+        if (!empty($file->fid)) {
+            // Change the file status from temporary to permanent.
+            $file->status = FILE_STATUS_PERMANENT;
+            file_save($file);
+
+            // Required to be able to reference this file.
+            file_usage_add($file, 'services', 'files', $file->fid);
+
+            $files[$field_name] = $file;
+        }
+        else {
+            return services_error(t('An unknown error occured'), 500);
+        }
+    }
+    return $files;
+}
+function delete_file($fid , $parameter = array()){
+    if(!isset($parameter["hash"]) || !(hash_true($parameter["hash"] , "file"))) return services_error(t('Failed to access'), 403);
+    $query = db_select("file_usage" , "u");
+    $query->fields("u" , array());
+    $query->condition("u.fid" , $fid);
+    $usage = $query->execute()->fetchAll();
+    if(count($usage) == 1 && $usage[0]->fid == $usage[0]->id){
+        $file = file_load($fid);
+        return file_delete($file , true);
+    }
+}
+
+function delete_image($data){
+
+  $data= json_decode(file_get_contents("php://input"));
+
+
+
+  foreach ($data->names as $name){
+
+    $query = db_select("file_managed", "f");
+    $query->fields("f", array("fid", "filename", "uid", "uri", "filemime", "filesize"));
+    $query->condition("f.filename", $name);
+
+
+    $res = $query->execute();
+    $row = $res->fetchAssoc();
+
+    $file = new stdClass();
+    $file->uid = $row["uid"];
+    $file->status = 0;
+    $file->filename = trim($row["filename"], '.');
+    $file->uri = $row["uri"];
+    $file->filemime = file_get_mimetype($row["filename"]);
+    $file->filesize = $row["filename"];
+    $file->fid = $row["fid"];
+
+
+    $deleted = db_delete('file_managed')
+      ->condition('fid', $file->fid)
+      ->execute();
+    db_delete('file_usage')
+      ->condition('fid', $file->fid)
+      ->execute();
+    if ($deleted) {
+
+      $results[$file->fid]= unlink($file->uri);
+
+    }
+  }
+  return $results;
+
+}
+
+
+function hash_true($hash , $resource){
+    $new_hash = hash_hmac("sha256" , $resource , "@Civil808Android@Saze808@" , false);
+    if(strcmp($hash, $new_hash) == 0) return true;
+    return false;
+}
+function generate_file_address($url){
+    $url = substr($url , 8);
+    $url = "https://ed808.com:92/sites/default/files" . $url;
+    return $url;
+}
+function reCaptcha($key){
+    $recaptcha_secret_key = variable_get('recaptcha_secret_key', '');
+    if (empty($key) || empty($recaptcha_secret_key)) {
+        return FALSE;
+    }
+
+    // Use drupal_http_request() to circumvent all issues with the Google library.
+    $recaptcha = new \ReCaptcha\ReCaptcha($recaptcha_secret_key, new \ReCaptcha\RequestMethod\Drupal7Post());
+
+    $resp = $recaptcha->verify(
+        $key,
+        ip_address()
+    );
+
+    if ($resp->isSuccess()) {
+        // Verified!
+        return TRUE;
+    }
+    return FALSE;
+}
+function is_flagged($viewer_uid , $object_id , $entity){
+    if($viewer_uid == 0) return false;
+
+    $query = db_select("flagging" , "flagging");
+    $query->fields("flagging" , array("flagging_id"));
+    $query->condition("flagging.uid" , $viewer_uid);
+    $query->condition("flagging.entity_type" , $entity);
+    $query->condition("flagging.entity_id" , $object_id);
+    $follow = $query->execute()->fetch();
+
+    if(empty($follow)) return false;
+
+    return true;
+}
+
+function add_log($uid, $action, $url = "", $method = "", $entity_type = "", $bundle = "", $entity_id = 0, $status, $description){
+    $log = db_insert("user_log")
+        ->fields(array(
+            "uid" => $uid,
+            "action" => $action,
+            "url" => $url,
+            "method" => $method,
+            "entity_type" => $entity_type,
+            "bundle" => $bundle,
+            "entity_id" => $entity_id,
+            "status" => $status,
+            "description" => $description,
+            "time" => REQUEST_TIME
+        ))->execute();
+
+    return $log;
+}
+
+
+

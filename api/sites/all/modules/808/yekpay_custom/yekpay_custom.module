@@ -1,0 +1,115 @@
+<?php
+function yekpay_custom_menu()
+{
+  $items['admin/yekpay'] = array(
+    'title' => t('pay page'),
+    'description' => t('pay page'),
+    'page callback' => 'yekpaysend',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+
+  );
+  $items['admin/yekpay/comeback'] = array(
+    'title' => t('comebackpay page'),
+    'description' => t('comebackpay page'),
+    'page callback' => 'yekpayReturn',
+    'access arguments' => array('administer menu'),
+    'type' => MENU_CALLBACK,
+
+  );
+  return $items;
+}
+
+
+function yekpaysend(){
+  global $user;
+
+  $amount = $_POST['amount'];
+  $email = $_POST['email'];
+  $firstName = $_POST['firstName'];
+  $lastName = $_POST['lastName'];
+  $mobile = $_POST['mobile'];
+  $address = $_POST['address'];
+  $city = $_POST['city'];
+  $postalCode = $_POST['postalCode'];
+  $country = $_POST['country'];
+  $currency = $_POST['currency'];
+
+
+ // $_POST = array();
+
+if(isset($_POST['amount'])) {
+  db_insert('yekpay_orders')
+    ->fields(array(
+      'uid' => $user->uid,
+      'order_status' => "yekpay",
+      'order_total' => $amount,
+      'primary_email' => $email,
+      'billing_first_name' => $firstName,
+      'billing_last_name' => $lastName,
+      'billing_phone' => $mobile,
+      'billing_address' => $address,
+      'billing_city' => $city,
+      'billing_postal_code' => $postalCode,
+      'billing_country' => $country,
+      'host' => $_SERVER['REMOTE_ADDR'],
+      'currency' => $currency,
+    ))
+    ->execute();
+}
+
+  $query = db_select('yekpay_orders','yko')->fields('yko',array('order_id'));
+    $order_id = $query->orderBy('order_id','DESC')->execute()->fetch();
+    $order_id = (int) ++$order_id->order_id;
+
+
+  $data = "merchantId=JAUT9GHNDH5HJUVRVYHB88Q4NKHQ6MX7
+  &amount=$amount
+  &fromCurrencyCode=$currency
+  &toCurrencyCode=978
+  &orderNumber=$order_id
+  &callback=https://ed808.com:92/admin/yekpay/comeback
+  &firstName=$firstName
+  &lastName=$lastName
+  &email=$email
+  &mobile=$mobile
+  &address=$address
+  &postalCode=$postalCode
+  &country=$country
+  &city=$city";
+
+  $options = array(
+    'method' => 'POST',
+    'data' => $data,
+    'timeout' => 30,
+    'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+  );
+
+  $result = drupal_http_request('https://gate.yekpay.com/api/payment/request', $options);
+  $Authority = json_decode($result->data)->Authority;
+  db_update('yekpay_orders')
+    ->fields(array(
+      'authority' => $Authority,
+    ))->condition('order_id',$order_id)->execute();
+  drupal_goto('https://gate.yekpay.com/api/payment/start/' . $Authority);
+}
+
+
+function yekpayReturn(){
+  global $user;
+if($_GET['success'] == 1){
+  db_update('yekpay_orders')
+    ->fields(array(
+      'order_status' => 'success',
+  ))->condition('authority',$_GET['authority'])->execute();
+  drupal_goto('https://ed808.com:2/cart/checkout?payment=true');
+
+}else{
+  db_update('yekpay_orders')
+    ->fields(array(
+      'order_status' => 'canceled',
+    ))->condition('authority',$_GET['authority'])->execute();
+  echo 'pardakht navovafag';die();
+}
+
+}

@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Paths (clean URLs)
+Disallow: /api/admin/
+
+# Files
+Disallow: vue971015
+Disallow: layouts
+Disallow: node_modules
+Disallow: pages
+Disallow: plugins
+Disallow: store
+Disallow: components
+

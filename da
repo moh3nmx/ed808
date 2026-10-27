@@ -1,0 +1,791 @@
+acpid (pid  1857) is running...
+php-fpm is stopped
+php-fpm is stopped
+php-fpm is stopped
+php-fpm is stopped
+php-fpm is stopped
+newrelic-daemon is stopped...
+php-fpm is stopped
+newrelic-daemon is stopped...
+php-fpm is stopped
+newrelic-daemon is stopped...
+atd (pid  3398) is running...
+auditd (pid  1699) is running...
+cagefs is running.
+Stopped
+cgred is stopped
+clamd (pid 1245059) is running...
+crond (pid  736143) is running...
+Status of csf:iptables filter table
+=====================
+Chain INPUT (policy DROP 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 ACCEPT     tcp  --  !lo    *       213.133.98.98        0.0.0.0/0           tcp dpt:53 
+2        0     0 ACCEPT     udp  --  !lo    *       213.133.98.98        0.0.0.0/0           udp dpt:53 
+3        0     0 ACCEPT     tcp  --  !lo    *       213.133.98.98        0.0.0.0/0           tcp spt:53 
+4    11913  889K ACCEPT     udp  --  !lo    *       213.133.98.98        0.0.0.0/0           udp spt:53 
+5        0     0 ACCEPT     tcp  --  !lo    *       213.133.100.100      0.0.0.0/0           tcp dpt:53 
+6        0     0 ACCEPT     udp  --  !lo    *       213.133.100.100      0.0.0.0/0           udp dpt:53 
+7        0     0 ACCEPT     tcp  --  !lo    *       213.133.100.100      0.0.0.0/0           tcp spt:53 
+8    11944  893K ACCEPT     udp  --  !lo    *       213.133.100.100      0.0.0.0/0           udp spt:53 
+9        0     0 ACCEPT     tcp  --  !lo    *       213.133.99.99        0.0.0.0/0           tcp dpt:53 
+10       0     0 ACCEPT     udp  --  !lo    *       213.133.99.99        0.0.0.0/0           udp dpt:53 
+11     312 72351 ACCEPT     tcp  --  !lo    *       213.133.99.99        0.0.0.0/0           tcp spt:53 
+12    185K   25M ACCEPT     udp  --  !lo    *       213.133.99.99        0.0.0.0/0           udp spt:53 
+13    491M   38G LOCALINPUT  all  --  !lo    *       0.0.0.0/0            0.0.0.0/0           
+14   2654M   11T ACCEPT     all  --  lo     *       0.0.0.0/0            0.0.0.0/0           
+15    489M   38G INVALID    tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           
+16    117K 9190K ACCEPT     icmp --  !lo    *       0.0.0.0/0            0.0.0.0/0           icmp type 8 limit: avg 1/sec burst 5 
+17    1102 78740 LOGDROPIN  icmp --  !lo    *       0.0.0.0/0            0.0.0.0/0           icmp type 8 
+18   12009 3061K ACCEPT     icmp --  !lo    *       0.0.0.0/0            0.0.0.0/0           
+19    475M   37G ACCEPT     all  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate RELATED,ESTABLISHED 
+20      57  2340 ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:20 
+21    4275  222K ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:21 
+22    9969  432K ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:22 
+23      53  2528 ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:4041 
+24      64  3108 ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:3031 
+25    8555  482K ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:25 
+26   52756 2120K ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:53 
+27    461K   26M ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:80 
+28    6223  258K ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:81 
+29    6441  381K ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:110 
+30    1121 63124 ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:143 
+31   3141K  179M ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:443 
+32     853 46900 ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:465 
+33      15   600 ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:6960 
+34    1292 73668 ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:587 
+35     716 38136 ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:993 
+36     557 29772 ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:995 
+37     962 39608 ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:2222 
+38   81833 4806K ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:6969 
+39     309 16240 ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:90 
+40      74  3640 ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:91 
+41   10600  610K ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:92 
+42     994 45912 ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:9090 
+43     131  6800 ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:9091 
+44     174  9960 ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:2 
+45       5   200 ACCEPT     tcp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:27825 
+46       0     0 ACCEPT     udp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW udp dpt:20 
+47      41 10748 ACCEPT     udp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW udp dpt:21 
+48    448K   32M ACCEPT     udp  --  !lo    *       0.0.0.0/0            0.0.0.0/0           ctstate NEW udp dpt:53 
+49   1372K   69M LOGDROPIN  all  --  !lo    *       0.0.0.0/0            0.0.0.0/0           
+
+Chain FORWARD (policy DROP 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy DROP 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            213.133.98.98       tcp dpt:53 
+2    11987  891K ACCEPT     udp  --  *      !lo     0.0.0.0/0            213.133.98.98       udp dpt:53 
+3        0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            213.133.98.98       tcp spt:53 
+4        0     0 ACCEPT     udp  --  *      !lo     0.0.0.0/0            213.133.98.98       udp spt:53 
+5        0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            213.133.100.100     tcp dpt:53 
+6    12019  893K ACCEPT     udp  --  *      !lo     0.0.0.0/0            213.133.100.100     udp dpt:53 
+7        0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            213.133.100.100     tcp spt:53 
+8        0     0 ACCEPT     udp  --  *      !lo     0.0.0.0/0            213.133.100.100     udp spt:53 
+9      468 27887 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            213.133.99.99       tcp dpt:53 
+10    185K   13M ACCEPT     udp  --  *      !lo     0.0.0.0/0            213.133.99.99       udp dpt:53 
+11       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            213.133.99.99       tcp spt:53 
+12       0     0 ACCEPT     udp  --  *      !lo     0.0.0.0/0            213.133.99.99       udp spt:53 
+13    848M 1174G LOCALOUTPUT  all  --  *      !lo     0.0.0.0/0            0.0.0.0/0           
+14       5   220 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           tcp dpt:53 
+15     767  212K ACCEPT     udp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           udp dpt:53 
+16    192K 8513K ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           tcp spt:53 
+17    450K   59M ACCEPT     udp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           udp spt:53 
+18   2654M   11T ACCEPT     all  --  *      lo      0.0.0.0/0            0.0.0.0/0           
+19    847M 1174G INVALID    tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           
+20    118K 9375K ACCEPT     icmp --  *      !lo     0.0.0.0/0            0.0.0.0/0           
+21    847M 1174G ACCEPT     all  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate RELATED,ESTABLISHED 
+22       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:20 
+23       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:22 
+24       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:4041 
+25       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:3031 
+26   10996  660K ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:25 
+27       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:53 
+28    9704  582K ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:80 
+29       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:81 
+30       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:110 
+31       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:113 
+32    1596 95760 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:443 
+33       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:587 
+34       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:993 
+35       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:6960 
+36       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:995 
+37       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:2222 
+38       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:6969 
+39       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:90 
+40       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:91 
+41       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:92 
+42       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:9090 
+43       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:9091 
+44       0     0 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:2 
+45      49  2940 ACCEPT     tcp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW tcp dpt:27825 
+46       0     0 ACCEPT     udp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW udp dpt:20 
+47       0     0 ACCEPT     udp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW udp dpt:21 
+48       0     0 ACCEPT     udp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW udp dpt:53 
+49       0     0 ACCEPT     udp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW udp dpt:113 
+50    5224  397K ACCEPT     udp  --  *      !lo     0.0.0.0/0            0.0.0.0/0           ctstate NEW udp dpt:123 
+51      24  1440 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            0.0.0.0/0           
+
+Chain ALLOWIN (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 ACCEPT     all  --  !lo    *       185.4.28.200         0.0.0.0/0           
+2        0     0 ACCEPT     all  --  !lo    *       91.98.205.157        0.0.0.0/0           
+
+Chain ALLOWOUT (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        0     0 ACCEPT     all  --  *      !lo     0.0.0.0/0            185.4.28.200        
+2        0     0 ACCEPT     all  --  *      !lo     0.0.0.0/0            91.98.205.157       
+
+Chain DENYIN (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1        8   440 DROP       all  --  !lo    *       180.125.22.90        0.0.0.0/0           
+2        1    40 DROP       all  --  !lo    *       36.26.153.60         0.0.0.0/0           
+3        4   192 DROP       all  --  !lo    *       125.129.137.61       0.0.0.0/0           
+4        1    40 DROP       all  --  !lo    *       1.85.97.205          0.0.0.0/0           
+5        1    40 DROP       all  --  !lo    *       223.255.127.84       0.0.0.0/0           
+6        2    80 DROP       all  --  !lo    *       117.10.53.159        0.0.0.0/0           
+7        1    40 DROP       all  --  !lo    *       125.133.165.180      0.0.0.0/0           
+8        1    40 DROP       all  --  !lo    *       221.149.133.167      0.0.0.0/0           
+9        1    40 DROP       all  --  !lo    *       58.18.146.72         0.0.0.0/0           
+10       4   192 DROP       all  --  !lo    *       58.21.35.42          0.0.0.0/0           
+11    1261 75660 DROP       all  --  !lo    *       141.98.80.73         0.0.0.0/0           
+12      74  3736 DROP       all  --  !lo    *       66.171.167.194       0.0.0.0/0           
+13      11   508 DROP       all  --  !lo    *       60.166.13.90         0.0.0.0/0           
+14      11   508 DROP       all  --  !lo    *       175.118.128.16       0.0.0.0/0           
+15    1841  103K DROP       all  --  !lo    *       45.227.253.116       0.0.0.0/0           
+16      11   508 DROP       all  --  !lo    *       1.207.13.105         0.0.0.0/0           
+17       8   440 DROP       all  --  !lo    *       175.5.114.133        0.0.0.0/0           
+18       8   356 DROP       all  --  !lo    *       60.166.72.158        0.0.0.0/0           
+19      11   590 DROP       all  --  !lo    *       60.184.185.142       0.0.0.0/0           
+20       2    80 DROP       all  --  !lo    *       42.243.30.134        0.0.0.0/0           
+21      80  4740 DROP       all  --  !lo    *       88.208.247.32        0.0.0.0/0           
+22       3   156 DROP       all  --  !lo    *       60.177.119.216       0.0.0.0/0           
+23       9   396 DROP       all  --  !lo    *       175.197.117.69       0.0.0.0/0           
+24       9   510 DROP       all  --  !lo    *       119.123.194.68       0.0.0.0/0           
+25       7   344 DROP       all  --  !lo    *       61.142.21.7          0.0.0.0/0           
+26      10   436 DROP       all  --  !lo    *       114.254.250.18       0.0.0.0/0           
+27       9   457 DROP       all  --  !lo    *       182.146.159.148      0.0.0.0/0           
+28       8   356 DROP       all  --  !lo    *       119.54.59.162        0.0.0.0/0           
+29       4   205 DROP       all  --  !lo    *       101.64.136.210       0.0.0.0/0           
+30       1    40 DROP       all  --  !lo    *       180.64.213.107       0.0.0.0/0           
+31       8   356 DROP       all  --  !lo    *       27.30.100.245        0.0.0.0/0           
+32       1    40 DROP       all  --  !lo    *       122.139.38.109       0.0.0.0/0           
+33       8   356 DROP       all  --  !lo    *       118.117.30.44        0.0.0.0/0           
+34       9   402 DROP       all  --  !lo    *       121.13.237.36        0.0.0.0/0           
+35      11   686 DROP       all  --  !lo    *       49.68.108.44         0.0.0.0/0           
+36       7   316 DROP       all  --  !lo    *       180.108.128.25       0.0.0.0/0           
+37      11   508 DROP       all  --  !lo    *       1.26.82.32           0.0.0.0/0           
+38    1740 88012 DROP       all  --  !lo    *       185.228.82.120       0.0.0.0/0           
+39       8   356 DROP       all  --  !lo    *       27.156.124.234       0.0.0.0/0           
+40       8   374 DROP       all  --  !lo    *       116.228.200.206      0.0.0.0/0           
+41       1    40 DROP       all  --  !lo    *       112.228.211.33       0.0.0.0/0           
+42      12   608 DROP       all  --  !lo    *       104.211.10.129       0.0.0.0/0           
+43       4   196 DROP       all  --  !lo    *       42.92.84.40          0.0.0.0/0           
+44       2    80 DROP       all  --  !lo    *       221.9.105.5          0.0.0.0/0           
+45       8   384 DROP       all  --  !lo    *       120.1.156.247        0.0.0.0/0           
+46       9   396 DROP       all  --  !lo    *       219.235.119.109      0.0.0.0/0           
+47       1    40 DROP       all  --  !lo    *       223.146.130.238      0.0.0.0/0           
+48       1    40 DROP       all  --  !lo    *       42.178.56.181        0.0.0.0/0           
+49       8   356 DROP       all  --  !lo    *       182.135.226.43       0.0.0.0/0           
+50       1    40 DROP       all  --  !lo    *       110.52.151.127       0.0.0.0/0           
+51      10   526 DROP       all  --  !lo    *       115.211.216.195      0.0.0.0/0           
+52       1    40 DROP       all  --  !lo    *       58.244.40.140        0.0.0.0/0           
+53   57678 3461K DROP       all  --  !lo    *       141.98.9.67          0.0.0.0/0           
+54       7   316 DROP       all  --  !lo    *       41.226.248.150       0.0.0.0/0           
+55      19   954 DROP       all  --  !lo    *       61.180.184.214       0.0.0.0/0           
+56       8   356 DROP       all  --  !lo    *       59.120.220.49        0.0.0.0/0           
+57       1    40 DROP       all  --  !lo    *       223.214.168.179      0.0.0.0/0           
+58       3   180 DROP       all  --  !lo    *       179.182.195.64       0.0.0.0/0           
+59   94056 5643K DROP       all  --  !lo    *       141.98.9.195         0.0.0.0/0           
+60       1    52 DROP       all  --  !lo    *       116.6.55.85          0.0.0.0/0           
+61   58196 3492K DROP       all  --  !lo    *       141.98.9.130         0.0.0.0/0           
+62   76367 4582K DROP       all  --  !lo    *       141.98.9.205         0.0.0.0/0           
+63   49561 2974K DROP       all  --  !lo    *       141.98.9.5           0.0.0.0/0           
+64       9   480 DROP       all  --  !lo    *       223.146.26.231       0.0.0.0/0           
+65       1    40 DROP       all  --  !lo    *       183.134.103.85       0.0.0.0/0           
+66       1    40 DROP       all  --  !lo    *       113.221.27.214       0.0.0.0/0           
+67      11   525 DROP       all  --  !lo    *       124.94.196.105       0.0.0.0/0           
+68   58195 3492K DROP       all  --  !lo    *       141.98.9.42          0.0.0.0/0           
+69       2    80 DROP       all  --  !lo    *       182.123.208.70       0.0.0.0/0           
+70       1    48 DROP       all  --  !lo    *       124.116.227.107      0.0.0.0/0           
+71       1    40 DROP       all  --  !lo    *       220.173.44.252       0.0.0.0/0           
+72       4   160 DROP       all  --  !lo    *       180.114.155.183      0.0.0.0/0           
+73    2323  139K DROP       all  --  !lo    *       45.82.153.37         0.0.0.0/0           
+74       9   402 DROP       all  --  !lo    *       220.190.237.249      0.0.0.0/0           
+75       6   305 DROP       all  --  !lo    *       111.225.204.32       0.0.0.0/0           
+76       1    48 DROP       all  --  !lo    *       182.107.16.251       0.0.0.0/0           
+77       8   425 DROP       all  --  !lo    *       101.80.94.13         0.0.0.0/0           
+78       0     0 DROP       all  --  !lo    *       120.228.214.1        0.0.0.0/0           
+79       1    40 DROP       all  --  !lo    *       112.236.214.184      0.0.0.0/0           
+80       9   512 DROP       all  --  !lo    *       60.178.140.241       0.0.0.0/0           
+81       1    40 DROP       all  --  !lo    *       175.148.67.70        0.0.0.0/0           
+82       1    40 DROP       all  --  !lo    *       117.158.82.21        0.0.0.0/0           
+83       8   356 DROP       all  --  !lo    *       139.201.165.221      0.0.0.0/0           
+84       1    40 DROP       all  --  !lo    *       125.117.235.217      0.0.0.0/0           
+85       1    40 DROP       all  --  !lo    *       223.199.158.72       0.0.0.0/0           
+86       2    80 DROP       all  --  !lo    *       220.74.111.69        0.0.0.0/0           
+87     573 29036 DROP       all  --  !lo    *       185.234.218.49       0.0.0.0/0           
+88       1    40 DROP       all  --  !lo    *       222.242.213.151      0.0.0.0/0           
+89       6   300 DROP       all  --  !lo    *       210.212.102.35       0.0.0.0/0           
+90       8   356 DROP       all  --  !lo    *       119.139.196.252      0.0.0.0/0           
+91       8   356 DROP       all  --  !lo    *       36.26.105.197        0.0.0.0/0           
+92      10   526 DROP       all  --  !lo    *       222.100.126.50       0.0.0.0/0           
+93     319 15544 DROP       all  --  !lo    *       116.255.243.72       0.0.0.0/0           
+94       8   356 DROP       all  --  !lo    *       180.123.173.71       0.0.0.0/0           
+95       5   240 DROP       all  --  !lo    *       82.147.220.206       0.0.0.0/0           
+96     270 16200 DROP       all  --  !lo    *       141.98.80.75         0.0.0.0/0           
+97       1    40 DROP       all  --  !lo    *       1.245.45.111         0.0.0.0/0           
+98       1    40 DROP       all  --  !lo    *       49.75.203.135        0.0.0.0/0           
+99       1    40 DROP       all  --  !lo    *       1.192.23.183         0.0.0.0/0           
+100      1    40 DROP       all  --  !lo    *       175.18.21.44         0.0.0.0/0           
+101     13   620 DROP       all  --  !lo    *       58.42.241.42         0.0.0.0/0           
+102      1    40 DROP       all  --  !lo    *       121.131.207.56       0.0.0.0/0           
+103      0     0 DROP       all  --  !lo    *       180.121.183.3        0.0.0.0/0           
+104      7   316 DROP       all  --  !lo    *       110.251.114.167      0.0.0.0/0           
+105      1    40 DROP       all  --  !lo    *       111.197.69.14        0.0.0.0/0           
+106     11   563 DROP       all  --  !lo    *       180.126.180.181      0.0.0.0/0           
+107      1    40 DROP       all  --  !lo    *       182.108.238.83       0.0.0.0/0           
+108      1    40 DROP       all  --  !lo    *       180.114.36.25        0.0.0.0/0           
+109   1744 88216 DROP       all  --  !lo    *       185.228.82.166       0.0.0.0/0           
+110     13   624 DROP       all  --  !lo    *       59.174.76.248        0.0.0.0/0           
+111     11   500 DROP       all  --  !lo    *       221.202.168.254      0.0.0.0/0           
+112     11   698 DROP       all  --  !lo    *       58.219.224.185       0.0.0.0/0           
+113   2269  127K DROP       all  --  !lo    *       45.227.253.117       0.0.0.0/0           
+114      7   316 DROP       all  --  !lo    *       110.88.25.14         0.0.0.0/0           
+115      9   480 DROP       all  --  !lo    *       114.95.188.231       0.0.0.0/0           
+116      1    40 DROP       all  --  !lo    *       122.245.93.188       0.0.0.0/0           
+117      1    40 DROP       all  --  !lo    *       115.221.66.201       0.0.0.0/0           
+118      8   356 DROP       all  --  !lo    *       114.224.19.243       0.0.0.0/0           
+119      6   276 DROP       all  --  !lo    *       117.82.218.183       0.0.0.0/0           
+120      1    40 DROP       all  --  !lo    *       117.84.248.32        0.0.0.0/0           
+121      7   379 DROP       all  --  !lo    *       116.31.140.220       0.0.0.0/0           
+122      8   356 DROP       all  --  !lo    *       59.120.220.60        0.0.0.0/0           
+123      8   356 DROP       all  --  !lo    *       121.238.26.187       0.0.0.0/0           
+124   1541 92460 DROP       all  --  !lo    *       185.53.168.160       0.0.0.0/0           
+125      1    40 DROP       all  --  !lo    *       124.92.199.179       0.0.0.0/0           
+126      1    40 DROP       all  --  !lo    *       129.204.230.125      0.0.0.0/0           
+127      7   316 DROP       all  --  !lo    *       222.223.216.86       0.0.0.0/0           
+128     29  1192 DROP       all  --  !lo    *       198.12.64.10         0.0.0.0/0           
+129      1    40 DROP       all  --  !lo    *       221.1.172.131        0.0.0.0/0           
+130      1    40 DROP       all  --  !lo    *       121.238.153.48       0.0.0.0/0           
+131      1    40 DROP       all  --  !lo    *       175.5.37.214         0.0.0.0/0           
+132      1    40 DROP       all  --  !lo    *       113.221.25.203       0.0.0.0/0           
+133      1    40 DROP       all  --  !lo    *       39.155.221.154       0.0.0.0/0           
+134      2   104 DROP       all  --  !lo    *       1.87.253.158         0.0.0.0/0           
+135      3   152 DROP       all  --  !lo    *       122.121.51.217       0.0.0.0/0           
+136      8   356 DROP       all  --  !lo    *       114.217.158.88       0.0.0.0/0           
+137   102K 6143K DROP       all  --  !lo    *       92.118.38.36         0.0.0.0/0           
+138      1    40 DROP       all  --  !lo    *       121.137.139.123      0.0.0.0/0           
+139      8   453 DROP       all  --  !lo    *       112.236.9.114        0.0.0.0/0           
+140     10   502 DROP       all  --  !lo    *       1.180.70.178         0.0.0.0/0           
+141     88  3936 DROP       all  --  !lo    *       103.207.38.154       0.0.0.0/0           
+142      1    40 DROP       all  --  !lo    *       180.95.147.26        0.0.0.0/0           
+143     10   468 DROP       all  --  !lo    *       120.194.35.178       0.0.0.0/0           
+144      8   356 DROP       all  --  !lo    *       117.131.90.58        0.0.0.0/0           
+145      8   356 DROP       all  --  !lo    *       117.67.219.108       0.0.0.0/0           
+146      8   356 DROP       all  --  !lo    *       1.80.216.246         0.0.0.0/0           
+147      6   315 DROP       all  --  !lo    *       115.216.189.16       0.0.0.0/0           
+148      1    40 DROP       all  --  !lo    *       60.178.45.93         0.0.0.0/0           
+149      9   444 DROP       all  --  !lo    *       121.162.229.38       0.0.0.0/0           
+150   1946  117K DROP       all  --  !lo    *       80.82.78.85          0.0.0.0/0           
+151      8   356 DROP       all  --  !lo    *       118.117.31.29        0.0.0.0/0           
+152      8   356 DROP       all  --  !lo    *       115.213.207.79       0.0.0.0/0           
+153     12   594 DROP       all  --  !lo    *       180.126.78.55        0.0.0.0/0           
+154      2   100 DROP       all  --  !lo    *       31.167.14.209        0.0.0.0/0           
+155      1    40 DROP       all  --  !lo    *       103.111.134.6        0.0.0.0/0           
+156      4   196 DROP       all  --  !lo    *       183.234.143.124      0.0.0.0/0           
+157     15   664 DROP       all  --  !lo    *       221.208.6.164        0.0.0.0/0           
+158      1    40 DROP       all  --  !lo    *       123.179.181.208      0.0.0.0/0           
+159      3   144 DROP       all  --  !lo    *       61.167.166.198       0.0.0.0/0           
+160      6   272 DROP       all  --  !lo    *       171.114.123.111      0.0.0.0/0           
+161      1    40 DROP       all  --  !lo    *       122.116.71.78        0.0.0.0/0           
+162      1    40 DROP       all  --  !lo    *       58.118.25.12         0.0.0.0/0           
+163      1    40 DROP       all  --  !lo    *       121.131.34.112       0.0.0.0/0           
+164     11   508 DROP       all  --  !lo    *       1.174.251.169        0.0.0.0/0           
+165      1    40 DROP       all  --  !lo    *       114.227.171.208      0.0.0.0/0           
+166     12   624 DROP       all  --  !lo    *       183.93.114.176       0.0.0.0/0           
+167      8   356 DROP       all  --  !lo    *       114.220.88.25        0.0.0.0/0           
+168      2   100 DROP       all  --  !lo    *       123.53.38.5          0.0.0.0/0           
+169      2    80 DROP       all  --  !lo    *       113.109.78.68        0.0.0.0/0           
+170      1    40 DROP       all  --  !lo    *       123.162.180.79       0.0.0.0/0           
+171      1    40 DROP       all  --  !lo    *       112.233.127.13       0.0.0.0/0           
+172      2   100 DROP       all  --  !lo    *       59.32.99.246         0.0.0.0/0           
+173      8   356 DROP       all  --  !lo    *       222.109.65.208       0.0.0.0/0           
+174      8   356 DROP       all  --  !lo    *       115.211.223.177      0.0.0.0/0           
+175      2    80 DROP       all  --  !lo    *       61.76.108.122        0.0.0.0/0           
+176      1    40 DROP       all  --  !lo    *       113.205.188.17       0.0.0.0/0           
+177     10   502 DROP       all  --  !lo    *       118.254.250.86       0.0.0.0/0           
+178     11   508 DROP       all  --  !lo    *       115.213.226.146      0.0.0.0/0           
+179      7   357 DROP       all  --  !lo    *       124.92.200.45        0.0.0.0/0           
+180     11   508 DROP       all  --  !lo    *       220.72.166.173       0.0.0.0/0           
+181      8   356 DROP       all  --  !lo    *       180.108.252.65       0.0.0.0/0           
+182      9   488 DROP       all  --  !lo    *       58.219.237.108       0.0.0.0/0           
+183      1    40 DROP       all  --  !lo    *       113.58.21.141        0.0.0.0/0           
+184      1    40 DROP       all  --  !lo    *       218.76.158.27        0.0.0.0/0           
+185      4   205 DROP       all  --  !lo    *       221.1.96.46          0.0.0.0/0           
+186     11   512 DROP       all  --  !lo    *       211.251.204.238      0.0.0.0/0           
+187    540 32400 DROP       all  --  !lo    *       141.98.80.80         0.0.0.0/0           
+188      8   356 DROP       all  --  !lo    *       115.230.74.0         0.0.0.0/0           
+189     15   902 DROP       all  --  !lo    *       103.89.90.196        0.0.0.0/0           
+190      5   224 DROP       all  --  !lo    *       113.12.195.87        0.0.0.0/0           
+191    378 22680 DROP       all  --  !lo    *       185.211.245.198      0.0.0.0/0           
+192     10   564 DROP       all  --  !lo    *       220.165.145.251      0.0.0.0/0           
+193    388 19750 DROP       all  --  !lo    *       203.163.247.143      0.0.0.0/0           
+194      8   356 DROP       all  --  !lo    *       49.234.46.39         0.0.0.0/0           
+195      2   100 DROP       all  --  !lo    *       39.149.19.121        0.0.0.0/0           
+196      8   356 DROP       all  --  !lo    *       59.32.28.226         0.0.0.0/0           
+197      9   477 DROP       all  --  !lo    *       124.89.8.196         0.0.0.0/0           
+198      8   356 DROP       all  --  !lo    *       118.112.96.46        0.0.0.0/0           
+199      3   150 DROP       all  --  !lo    *       111.200.174.237      0.0.0.0/0           
+200      1    40 DROP       all  --  !lo    *       49.70.80.25          0.0.0.0/0           
+
+Chain DENYOUT (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1       17  1549 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            180.125.22.90       
+2       17  1549 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            36.26.153.60        
+3       16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            125.129.137.61      
+4       17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            1.85.97.205         
+5       17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            223.255.127.84      
+6       16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            117.10.53.159       
+7       16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            125.133.165.180     
+8       16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            221.149.133.167     
+9       17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            58.18.146.72        
+10      16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            58.21.35.42         
+11       0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            141.98.80.73        
+12       0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            66.171.167.194      
+13      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            60.166.13.90        
+14      16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            175.118.128.16      
+15      13  1269 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            45.227.253.116      
+16      16  1206 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            1.207.13.105        
+17      17  1549 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            175.5.114.133       
+18      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            60.166.72.158       
+19      13  4144 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            60.184.185.142      
+20       1    52 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            42.243.30.134       
+21       0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            88.208.247.32       
+22       0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            60.177.119.216      
+23       1    52 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            175.197.117.69      
+24      17  1549 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            119.123.194.68      
+25      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            61.142.21.7         
+26       8   856 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            114.254.250.18      
+27      17  1379 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            182.146.159.148     
+28      14  1126 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            119.54.59.162       
+29      13  4144 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            101.64.136.210      
+30      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            180.64.213.107      
+31      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            27.30.100.245       
+32      14  1126 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            122.139.38.109      
+33      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            118.117.30.44       
+34      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            121.13.237.36       
+35      16  5416 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            49.68.108.44        
+36      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            180.108.128.25      
+37       1    52 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            1.26.82.32          
+38      26  1524 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            185.228.82.120      
+39      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            27.156.124.234      
+40      12  1176 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            116.228.200.206     
+41      16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            112.228.211.33      
+42       0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            104.211.10.129      
+43      20  1465 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            42.92.84.40         
+44      18  4344 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            221.9.105.5         
+45       1    52 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            120.1.156.247       
+46       8   856 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            219.235.119.109     
+47      16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            223.146.130.238     
+48      16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            42.178.56.181       
+49      16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            182.135.226.43      
+50      16  1464 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            110.52.151.127      
+51      16  1276 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            115.211.216.195     
+52      15  1237 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            58.244.40.140       
+53      11  1331 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            141.98.9.67         
+54      18  1418 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            41.226.248.150      
+55      16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            61.180.184.214      
+56      16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            59.120.220.49       
+57      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            223.214.168.179     
+58       0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            179.182.195.64      
+59      11  1331 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            141.98.9.195        
+60       0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            116.6.55.85         
+61       0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            141.98.9.130        
+62       0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            141.98.9.205        
+63      24  2600 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            141.98.9.5          
+64      16  5224 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            223.146.26.231      
+65      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            183.134.103.85      
+66      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            113.221.27.214      
+67      15  1237 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            124.94.196.105      
+68       0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            141.98.9.42         
+69       1    52 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            182.123.208.70      
+70       0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            124.116.227.107     
+71      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            220.173.44.252      
+72      16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            180.114.155.183     
+73       0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            45.82.153.37        
+74      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            220.190.237.249     
+75      16  1318 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            111.225.204.32      
+76       0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            182.107.16.251      
+77      15  4864 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            101.80.94.13        
+78       0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            120.228.214.1       
+79      16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            112.236.214.184     
+80      16  1318 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            60.178.140.241      
+81      16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            175.148.67.70       
+82      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            117.158.82.21       
+83      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            139.201.165.221     
+84      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            125.117.235.217     
+85      15  1199 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            223.199.158.72      
+86       1    52 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            220.74.111.69       
+87       0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            185.234.218.49      
+88      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            222.242.213.151     
+89      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            210.212.102.35      
+90      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            119.139.196.252     
+91      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            36.26.105.197       
+92      15  1198 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            222.100.126.50      
+93      90  9850 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            116.255.243.72      
+94      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            180.123.173.71      
+95      18  1418 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            82.147.220.206      
+96       0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            141.98.80.75        
+97      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            1.245.45.111        
+98      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            49.75.203.135       
+99      17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            1.192.23.183        
+100     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            175.18.21.44        
+101     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            58.42.241.42        
+102     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            121.131.207.56      
+103      0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            180.121.183.3       
+104     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            110.251.114.167     
+105     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            111.197.69.14       
+106     16  1276 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            180.126.180.181     
+107     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            182.108.238.83      
+108     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            180.114.36.25       
+109     26  1524 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            185.228.82.166      
+110     15  1237 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            59.174.76.248       
+111     15  1133 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            221.202.168.254     
+112     14  4672 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            58.219.224.185      
+113      0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            45.227.253.117      
+114     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            110.88.25.14        
+115     16  5224 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            114.95.188.231      
+116     15  1199 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            122.245.93.188      
+117     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            115.221.66.201      
+118     15  1198 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            114.224.19.243      
+119     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            117.82.218.183      
+120     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            117.84.248.32       
+121     13  1053 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            116.31.140.220      
+122     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            59.120.220.60       
+123     15  1199 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            121.238.26.187      
+124      0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            185.53.168.160      
+125     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            124.92.199.179      
+126     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            129.204.230.125     
+127     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            222.223.216.86      
+128     47  3848 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            198.12.64.10        
+129     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            221.1.172.131       
+130     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            121.238.153.48      
+131     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            175.5.37.214        
+132     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            113.221.25.203      
+133     15  4864 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            39.155.221.154      
+134      0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            1.87.253.158        
+135      0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            122.121.51.217      
+136     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            114.217.158.88      
+137      0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            92.118.38.36        
+138     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            121.137.139.123     
+139     15  1237 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            112.236.9.114       
+140     16  5224 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            1.180.70.178        
+141     80  8720 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            103.207.38.154      
+142     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            180.95.147.26       
+143     16  1206 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            120.194.35.178      
+144     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            117.131.90.58       
+145     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            117.67.219.108      
+146     16  1206 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            1.80.216.246        
+147     15  4864 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            115.216.189.16      
+148     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            60.178.45.93        
+149     15  4864 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            121.162.229.38      
+150      0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            80.82.78.85         
+151     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            118.117.31.29       
+152     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            115.213.207.79      
+153     16  5224 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            180.126.78.55       
+154      0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            31.167.14.209       
+155     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            103.111.134.6       
+156     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            183.234.143.124     
+157     14  1156 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            221.208.6.164       
+158     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            123.179.181.208     
+159     15  5044 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            61.167.166.198      
+160      8   856 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            171.114.123.111     
+161     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            122.116.71.78       
+162     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            58.118.25.12        
+163     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            121.131.34.112      
+164     10   920 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            1.174.251.169       
+165     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            114.227.171.208     
+166     14  4504 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            183.93.114.176      
+167     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            114.220.88.25       
+168      1    52 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            123.53.38.5         
+169      1    48 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            113.109.78.68       
+170     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            123.162.180.79      
+171     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            112.233.127.13      
+172      1    52 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            59.32.99.246        
+173     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            222.109.65.208      
+174     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            115.211.223.177     
+175      1    52 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            61.76.108.122       
+176     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            113.205.188.17      
+177     15  4864 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            118.254.250.86      
+178     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            115.213.226.146     
+179     15  4864 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            124.92.200.45       
+180      9   828 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            220.72.166.173      
+181     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            180.108.252.65      
+182      8   952 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            58.219.237.108      
+183     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            113.58.21.141       
+184     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            218.76.158.27       
+185     15  1237 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            221.1.96.46         
+186     15  1133 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            211.251.204.238     
+187      0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            141.98.80.80        
+188     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            115.230.74.0        
+189     18  1287 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            103.89.90.196       
+190     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            113.12.195.87       
+191      0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            185.211.245.198     
+192     10  1040 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            220.165.145.251     
+193     76  8284 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            203.163.247.143     
+194     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            49.234.46.39        
+195      0     0 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            39.149.19.121       
+196     17  1345 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            59.32.28.226        
+197     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            124.89.8.196        
+198     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            118.112.96.46       
+199     15  4864 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            111.200.174.237     
+200     16  1272 LOGDROPOUT  all  --  *      !lo     0.0.0.0/0            49.70.80.25         
+
+Chain INVALID (2 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1    9275K  377M INVDROP    all  --  *      *       0.0.0.0/0            0.0.0.0/0           ctstate INVALID 
+2        0     0 INVDROP    tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp flags:0x3F/0x00 
+3        0     0 INVDROP    tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp flags:0x3F/0x3F 
+4        0     0 INVDROP    tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp flags:0x03/0x03 
+5        0     0 INVDROP    tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp flags:0x06/0x06 
+6        0     0 INVDROP    tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp flags:0x05/0x05 
+7        0     0 INVDROP    tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp flags:0x11/0x01 
+8        0     0 INVDROP    tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp flags:0x18/0x08 
+9        0     0 INVDROP    tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp flags:0x30/0x20 
+10   51905   23M INVDROP    tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp flags:!0x17/0x02 ctstate NEW 
+
+Chain INVDROP (10 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1    9327K  400M DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+
+Chain LOCALINPUT (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1     491M   38G ALLOWIN    all  --  !lo    *       0.0.0.0/0            0.0.0.0/0           
+2     491M   38G DENYIN     all  --  !lo    *       0.0.0.0/0            0.0.0.0/0           
+
+Chain LOCALOUTPUT (1 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1     848M 1174G ALLOWOUT   all  --  *      !lo     0.0.0.0/0            0.0.0.0/0           
+2     848M 1174G DENYOUT    all  --  *      !lo     0.0.0.0/0            0.0.0.0/0           
+
+Chain LOGDROPIN (2 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1    49338 2057K DROP       tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:23 
+2       20   945 DROP       udp  --  *      *       0.0.0.0/0            0.0.0.0/0           udp dpt:23 
+3       16   668 DROP       tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:67 
+4        0     0 DROP       udp  --  *      *       0.0.0.0/0            0.0.0.0/0           udp dpt:67 
+5        2    80 DROP       tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:68 
+6      117 34355 DROP       udp  --  *      *       0.0.0.0/0            0.0.0.0/0           udp dpt:68 
+7      218  9012 DROP       tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:111 
+8      331 22095 DROP       udp  --  *      *       0.0.0.0/0            0.0.0.0/0           udp dpt:111 
+9       58  2420 DROP       tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:113 
+10       8   224 DROP       udp  --  *      *       0.0.0.0/0            0.0.0.0/0           udp dpt:113 
+11    1270 55576 DROP       tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpts:135:139 
+12     467 33984 DROP       udp  --  *      *       0.0.0.0/0            0.0.0.0/0           udp dpts:135:139 
+13    528K   27M DROP       tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:445 
+14      20  1005 DROP       udp  --  *      *       0.0.0.0/0            0.0.0.0/0           udp dpt:445 
+15      48  2016 DROP       tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:500 
+16     397 97844 DROP       udp  --  *      *       0.0.0.0/0            0.0.0.0/0           udp dpt:500 
+17      11   440 DROP       tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:513 
+18       0     0 DROP       udp  --  *      *       0.0.0.0/0            0.0.0.0/0           udp dpt:513 
+19      18   788 DROP       tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:520 
+20     258 13212 DROP       udp  --  *      *       0.0.0.0/0            0.0.0.0/0           udp dpt:520 
+21    456K   19M LOG        tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           limit: avg 30/min burst 5 LOG flags 0 level 4 prefix `Firewall: *TCP_IN Blocked* ' 
+22   23777 6107K LOG        udp  --  *      *       0.0.0.0/0            0.0.0.0/0           limit: avg 30/min burst 5 LOG flags 0 level 4 prefix `Firewall: *UDP_IN Blocked* ' 
+23     783 62780 LOG        icmp --  *      *       0.0.0.0/0            0.0.0.0/0           limit: avg 30/min burst 5 LOG flags 0 level 4 prefix `Firewall: *ICMP_IN Blocked* ' 
+24    793K   40M DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+
+Chain LOGDROPOUT (201 references)
+num   pkts bytes target     prot opt in     out     source               destination         
+1       24  1440 LOG        tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp flags:0x17/0x02 limit: avg 30/min burst 5 LOG flags 8 level 4 prefix `Firewall: *TCP_OUT Blocked* ' 
+2        0     0 LOG        udp  --  *      *       0.0.0.0/0            0.0.0.0/0           limit: avg 30/min burst 5 LOG flags 8 level 4 prefix `Firewall: *UDP_OUT Blocked* ' 
+3        0     0 LOG        icmp --  *      *       0.0.0.0/0            0.0.0.0/0           limit: avg 30/min burst 5 LOG flags 8 level 4 prefix `Firewall: *ICMP_OUT Blocked* ' 
+4     4029  417K REJECT     all  --  *      *       0.0.0.0/0            0.0.0.0/0           reject-with icmp-port-unreachable 
+
+
+iptables mangle table
+=====================
+Chain PREROUTING (policy ACCEPT 3145M packets, 11T bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain INPUT (policy ACCEPT 3145M packets, 11T bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 3502M packets, 12T bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain POSTROUTING (policy ACCEPT 3501M packets, 12T bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+
+iptables raw table
+==================
+Chain PREROUTING (policy ACCEPT 3145M packets, 11T bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 3502M packets, 12T bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+
+iptables nat table
+==================
+Chain PREROUTING (policy ACCEPT 7552K packets, 432M bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain POSTROUTING (policy ACCEPT 14M packets, 868M bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 14M packets, 888M bytes)
+num   pkts bytes target     prot opt in     out     source               destination         
+
+Status of cxswatch daemon: Running
+da-popb4smtp (pid  1133578) is running...
+db_governor (pid  725194) is running...
+directadmin (pid  2393762) is running...
+dovecot (pid 2092) is running...
+exim (pid  1207026) is running...
+Firebird server [default] is stopped
+freshclam (pid 2855466) is running...
+httpd (pid  2763319) is running...
+Table: filter
+Chain INPUT (policy DROP)
+num  target     prot opt source               destination         
+1    ACCEPT     tcp      2a01:4f8:0:a111::add:9898/128  ::/0                tcp dpt:53 
+2    ACCEPT     udp      2a01:4f8:0:a111::add:9898/128  ::/0                udp dpt:53 
+3    ACCEPT     tcp      2a01:4f8:0:a111::add:9898/128  ::/0                tcp spt:53 
+4    ACCEPT     udp      2a01:4f8:0:a111::add:9898/128  ::/0                udp spt:53 
+5    ACCEPT     tcp      2a01:4f8:0:a102::add:9999/128  ::/0                tcp dpt:53 
+6    ACCEPT     udp      2a01:4f8:0:a102::add:9999/128  ::/0                udp dpt:53 
+7    ACCEPT     tcp      2a01:4f8:0:a102::add:9999/128  ::/0                tcp spt:53 
+8    ACCEPT     udp      2a01:4f8:0:a102::add:9999/128  ::/0                udp spt:53 
+9    ACCEPT     tcp      2a01:4f8:0:a0a1::add:1010/128  ::/0                tcp dpt:53 
+10   ACCEPT     udp      2a01:4f8:0:a0a1::add:1010/128  ::/0                udp dpt:53 
+11   ACCEPT     tcp      2a01:4f8:0:a0a1::add:1010/128  ::/0                tcp spt:53 
+12   ACCEPT     udp      2a01:4f8:0:a0a1::add:1010/128  ::/0                udp spt:53 
+13   LOCALINPUT  all      ::/0                 ::/0                
+14   ACCEPT     all      ::/0                 ::/0                
+15   INVALID    tcp      ::/0                 ::/0                
+16   ACCEPT     icmpv6    ::/0                 ::/0                
+17   ACCEPT     all      ::/0                 ::/0                ctstate RELATED,ESTABLISHED 
+18   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:20 
+19   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:21 
+20   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:22 
+21   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:25 
+22   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:53 
+23   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:80 
+24   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:110 
+25   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:143 
+26   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:443 
+27   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:465 
+28   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:587 
+29   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:993 
+30   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:995 
+31   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:2222 
+32   ACCEPT     udp      ::/0                 ::/0                ctstate NEW udp dpt:20 
+33   ACCEPT     udp      ::/0                 ::/0                ctstate NEW udp dpt:21 
+34   ACCEPT     udp      ::/0                 ::/0                ctstate NEW udp dpt:53 
+35   LOGDROPIN  all      ::/0                 ::/0                
+
+Chain FORWARD (policy DROP)
+num  target     prot opt source               destination         
+
+Chain OUTPUT (policy DROP)
+num  target     prot opt source               destination         
+1    ACCEPT     tcp      ::/0                 2a01:4f8:0:a111::add:9898/128 tcp dpt:53 
+2    ACCEPT     udp      ::/0                 2a01:4f8:0:a111::add:9898/128 udp dpt:53 
+3    ACCEPT     tcp      ::/0                 2a01:4f8:0:a111::add:9898/128 tcp spt:53 
+4    ACCEPT     udp      ::/0                 2a01:4f8:0:a111::add:9898/128 udp spt:53 
+5    ACCEPT     tcp      ::/0                 2a01:4f8:0:a102::add:9999/128 tcp dpt:53 
+6    ACCEPT     udp      ::/0                 2a01:4f8:0:a102::add:9999/128 udp dpt:53 
+7    ACCEPT     tcp      ::/0                 2a01:4f8:0:a102::add:9999/128 tcp spt:53 
+8    ACCEPT     udp      ::/0                 2a01:4f8:0:a102::add:9999/128 udp spt:53 
+9    ACCEPT     tcp      ::/0                 2a01:4f8:0:a0a1::add:1010/128 tcp dpt:53 
+10   ACCEPT     udp      ::/0                 2a01:4f8:0:a0a1::add:1010/128 udp dpt:53 
+11   ACCEPT     tcp      ::/0                 2a01:4f8:0:a0a1::add:1010/128 tcp spt:53 
+12   ACCEPT     udp      ::/0                 2a01:4f8:0:a0a1::add:1010/128 udp spt:53 
+13   LOCALOUTPUT  all      ::/0                 ::/0                
+14   ACCEPT     tcp      ::/0                 ::/0                tcp dpt:53 
+15   ACCEPT     udp      ::/0                 ::/0                udp dpt:53 
+16   ACCEPT     tcp      ::/0                 ::/0                tcp spt:53 
+17   ACCEPT     udp      ::/0                 ::/0                udp spt:53 
+18   ACCEPT     all      ::/0                 ::/0                
+19   INVALID    tcp      ::/0                 ::/0                
+20   ACCEPT     icmpv6    ::/0                 ::/0                
+21   ACCEPT     all      ::/0                 ::/0                ctstate RELATED,ESTABLISHED 
+22   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:20 
+23   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:21 
+24   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:22 
+25   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:25 
+26   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:53 
+27   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:80 
+28   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:110 
+29   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:113 
+30   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:443 
+31   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:587 
+32   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:993 
+33   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:995 
+34   ACCEPT     tcp      ::/0                 ::/0                ctstate NEW tcp dpt:2222 
+35   ACCEPT     udp      ::/0                 ::/0                ctstate NEW udp dpt:20 
+36   ACCEPT     udp      ::/0                 ::/0                ctstate NEW udp dpt:21 
+37   ACCEPT     udp      ::/0                 ::/0                ctstate NEW udp dpt:53 
+38   ACCEPT     udp      ::/0                 ::/0                ctstate NEW udp dpt:113 
+39   ACCEPT     udp      ::/0                 ::/0                ctstate NEW udp dpt:123 
+40   LOGDROPOUT  all      ::/0                 ::/0                
+
+Chain ALLOWIN (1 references)
+num  target     prot opt source               destination         
+
+Chain ALLOWOUT (1 references)
+num  target     prot opt source               destination         
+
+Chain DENYIN (1 references)
+num  target     prot opt source               destination         
+
+Chain DENYOUT (1 references)
+num  target     prot opt source               destination         
+
+Chain INVALID (2 references)
+num  target     prot opt source               destination         
+1    INVDROP    all      ::/0                 ::/0                ctstate INVALID 
+2    INVDROP    tcp      ::/0                 ::/0                tcp flags:0x3F/0x00 
+3    INVDROP    tcp      ::/0                 ::/0                tcp flags:0x3F/0x3F 
+4    INVDROP    tcp      ::/0                 ::/0                tcp flags:0x03/0x03 
+5    INVDROP    tcp      ::/0                 ::/0                tcp flags:0x06/0x06 
+6    INVDROP    tcp      ::/0                 ::/0                tcp flags:0x05/0x05 
+7    INVDROP    tcp      ::/0                 ::/0                tcp flags:0x11/0x01 
+8    INVDROP    tcp      ::/0                 ::/0                tcp flags:0x18/0x08 
+9    INVDROP    tcp      ::/0                 ::/0                tcp flags:0x30/0x20 
+10   INVDROP    tcp      ::/0                 ::/0                tcp flags:!0x17/0x02 ctstate NEW 
+
+Chain INVDROP (10 references)
+num  target     prot opt source               destination         
+1    DROP       all      ::/0                 ::/0                
+
+Chain LOCALINPUT (1 references)
+num  target     prot opt source               destination         
+1    ALLOWIN    all      ::/0                 ::/0                
+2    DENYIN     all      ::/0                 ::/0                
+
+Chain LOCALOUTPUT (1 references)
+num  target     prot opt source               destination         
+1    ALLOWOUT   all      ::/0                 ::/0                
+2    DENYOUT    all      ::/0                 ::/0                
+
+Chain LOGDROPIN (1 references)
+num  target     prot opt source               destination         
+1    DROP       tcp      ::/0                 ::/0                tcp dpt:23 
+2    DROP       udp      ::/0                 ::/0                udp dpt:23 
+3    DROP       tcp      ::/0                 ::/0                tcp dpt:67 
+4    DROP       udp      ::/0                 ::/0                udp dpt:67 
+5    DROP       tcp      ::/0                 ::/0                tcp dpt:68 
+6    DROP       udp      ::/0                 ::/0                udp dpt:68 
+7    DROP       tcp      ::/0                 ::/0                tcp dpt:111 
+8    DROP       udp      ::/0                 ::/0                udp dpt:111 
+9    DROP       tcp      ::/0                 ::/0                tcp dpt:113 
+10   DROP       udp      ::/0                 ::/0                udp dpt:113 
+11   DROP       tcp      ::/0                 ::/0   

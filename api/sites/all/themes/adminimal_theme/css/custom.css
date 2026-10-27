@@ -1,0 +1,11 @@
+.view-header .export {
+    display: block;
+    text-align: right;
+    margin: 0px 25px;
+    padding: 0px 25px;
+}
+.view-header .export a{
+    display: block;
+    padding: 2px 0px;
+    margin: 2px 0px;
+}

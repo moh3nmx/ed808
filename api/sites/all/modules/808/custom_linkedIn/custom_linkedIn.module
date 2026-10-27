@@ -1,0 +1,276 @@
+<?php
+
+/**
+* Implements hook_menu().
+*/
+function custom_linkedIn_menu(){
+    $items['linkedin/join'] = array(
+        'title' => t('LinkedIn Join'),
+        'description' => t('LinkedIn Join function'),
+        'page callback' => 'linked_in_join',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
+    $items['linkedin/connect'] = array(
+        'title' => t('LinkedIn connection'),
+        'description' => t('LinkedIn Connection function'),
+        'page callback' => 'linked_in_connect',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
+}
+
+/**
+ * It is called form LinkedIn Call Back
+ * If everything is ok, It is backed with "code"
+ * If there is an error, It is backed wih "error"
+ */
+function linked_in_join(){
+    /*get user authentication code from linkedin*/
+    $code =  isset($_GET["code"]) && !empty($_GET["code"]) ? $_GET["code"] : "";
+    $error = isset($_GET["error"]) && !empty($_GET["error"]) ? $_GET["error"] : "";
+
+    if(($error === "user_cancelled_login" || $error === "user_cancelled_authorize")){
+        redirect_error($error);
+    }
+    if(empty($code)){
+        redirect_error();
+    }
+
+    /*sending a request to get access token*/
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://www.linkedin.com/oauth/v2/accessToken",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => "grant_type=authorization_code&code=" . $code . "&redirect_uri=https://ed808.com:92/linkedin/join&client_id=77gasbcb9ngw6d&client_secret=eLNyPD8CUAuMBf0d",
+        CURLOPT_HTTPHEADER => array(
+            "content-type: application/x-www-form-urlencoded"
+        ),
+    ));
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+    curl_close($curl);
+    if($err){
+        redirect_error();
+    }
+    $response = json_decode($response, true);
+    if(isset($response["error"]) && !empty($response["error"])){
+        redirect_error();
+    }
+
+    /* If token is fetched correctly
+     * sending request to fetch Email
+     */
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+            "authorization: Bearer " . $response["access_token"],
+            "cache-control: no-cache",
+            "connection: Keep-Alive"
+        ),
+    ));
+    $data = curl_exec($curl);
+    $err = curl_error($curl);
+    curl_close($curl);
+    if($err){
+        redirect_error();
+    }
+
+    $email = json_decode($data, true);
+    $email = $email["elements"][0]["handle~"]["emailAddress"];
+
+    /*if user has already logged in, just redirect */
+    global $user;
+    if($user->uid > 0) {
+        $parameter[] = "uid=" . $user->uid;
+        $parameter[] = "token=" . drupal_get_token('services');
+        $parameter[] = "action=login";
+        $param = implode("&" , $parameter);
+        $base_url = "https://ed808.com/login/linkedin";
+        $path = $base_url . "?" . $param;
+        drupal_goto($path);
+        die();
+    }
+
+    /*get the uid with this email for making the user login*/
+    $uid = db_select("users" , "user")->fields("user" , array("uid"))->condition("mail" , $email)->execute()->fetch();
+    if(empty($uid)){
+        $username = explode("@" , $email);
+        $username = $username[0];
+        do {
+            $check_username = db_select("users", "user")->fields("user", array("uid"))->condition("name", $username)->execute()->fetch();
+            if(!empty($check_username)) $username .= '1';
+        }while(!empty($check_username));
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.linkedin.com/v2/me",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "authorization: Bearer " . $response["access_token"],
+                "cache-control: no-cache",
+                "connection: Keep-Alive"
+            ),
+        ));
+        $data = curl_exec($curl);
+        $err = curl_error($curl);
+        if($err){
+            redirect_error();
+        }
+        curl_close($curl);
+        $data = json_decode($data);
+        $full_name = $data->localizedFirstName . " " . $data->localizedLastName;
+        $full_name = trim($full_name);
+        if(empty($full_name)){
+            redirect_error();
+        }
+        $pass = user_password();
+        $new_user = array(
+            'name' => $username,
+            'password' => $pass,
+            'mail' => $email,
+            'status' => 1,
+            'init' => $email,
+            'roles' => array(
+                DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+            ),
+            'field_full_name' => array('und' => array(0 => array('value' => $full_name))),
+        );
+        $user = user_save('', $new_user);
+        _user_mail_notify('register_no_approval_required', $user);
+        user_login_finalize();
+        $location = "register";
+    }
+    else{
+        /*login user*/
+        $user = user_load($uid->uid);
+        user_login_finalize();
+        $location = "login";
+    }
+
+
+    db_merge("custom_linkedIn_token")
+        ->key(array(
+            "uid" => $user->uid
+        ))
+        ->fields(array(
+            "token" => $response["access_token"],
+            "location" => $location,
+            "expire" => REQUEST_TIME + $response["expires_in"]
+        ))->execute();
+
+
+    $parameter[] = "uid=" . $user->uid;
+    $parameter[] = "token=" . drupal_get_token('services');
+    $parameter[] = "action=" . $location;
+    $param = implode("&" , $parameter);
+    $base_url = "https://ed808.com/login/linkedin";
+    $path = $base_url . "?" . $param;
+    drupal_goto($path);
+}
+function redirect_error($error = "unknown"){
+    $parameter[] = "error=" . $error;
+    $param = implode("&" , $parameter);
+    $base_url = "https://ed808.com/login/linkedin";
+    $path = $base_url . "?" . $param;
+    drupal_goto($path);
+    die();
+}
+
+/*connect the profile to linkedin*/
+function linked_in_connect(){
+    /*get user authentication code from linkedin*/
+    $code =  isset($_GET["code"]) && !empty($_GET["code"]) ? $_GET["code"] : "";
+    $error = isset($_GET["error"]) && !empty($_GET["error"]) ? $_GET["error"] : "";
+    if(($error === "user_cancelled_login" || $error === "user_cancelled_authorize")){
+        $parameter[] = "error=" . $error;
+        $param = implode("&" , $parameter);
+        $base_url = "https://ed808.com/login/linkedin";
+        $path = $base_url . "?" . $param;
+        drupal_goto($path);
+        die();
+    }
+    if(empty($code)){
+        $parameter[] = "error=unknown";
+        $param = implode("&" , $parameter);
+        $base_url = "https://ed808.com/login/linkedin";
+        $path = $base_url . "?" . $param;
+        drupal_goto($path);
+        die();
+    }
+
+    /*sending a request to get access token*/
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://www.linkedin.com/oauth/v2/accessToken",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => "grant_type=authorization_code&code=" . $code . "&redirect_uri=https://ed808.com:92/linkedin/connect&client_id=77gasbcb9ngw6d&client_secret=eLNyPD8CUAuMBf0d",
+        CURLOPT_HTTPHEADER => array(
+            "content-type: application/x-www-form-urlencoded"
+        ),
+    ));
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+    curl_close($curl);
+    if($err){
+        $parameter[] = "error=unknown";
+        $param = implode("&" , $parameter);
+        $base_url = "https://ed808.com/login/linkedin";
+        $path = $base_url . "?" . $param;
+        drupal_goto($path);
+        die();
+    }
+    $response = json_decode($response, true);
+    if(isset($response["error"]) && !empty($response["error"])){
+        $parameter[] = "error=unknown";
+        $param = implode("&" , $parameter);
+        $base_url = "https://ed808.com/login/linkedin";
+        $path = $base_url . "?" . $param;
+        drupal_goto($path);
+        die();
+    }
+
+    /*update or insert token for user*/
+    global $user;
+    db_merge("custom_linkedIn_token")
+        ->key(array(
+            "uid" => $user->uid
+        ))
+        ->fields(array(
+            "token" => $response["access_token"],
+            "location" => "connect",
+            "expire" => REQUEST_TIME + $response["expires_in"]
+        ))->execute();
+
+    $parameter[] = "uid=" . $user->uid;
+    $parameter[] = "action=connect";
+    $param = implode("&" , $parameter);
+    $base_url = "https://ed808.com/login/linkedin";
+    $path = $base_url . "?" . $param;
+    drupal_goto($path);
+}

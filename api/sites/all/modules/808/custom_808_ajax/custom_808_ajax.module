@@ -1,0 +1,570 @@
+<?php
+
+/*
+ * Implements hook_menu().
+ */
+function custom_808_ajax_menu() {
+  $items['ajax808/%/%'] = array(
+    'page callback' => 'custom_808_ajax_news_notify',
+    'type' => MENU_CALLBACK,
+	'page arguments' => array(2,3),
+    'access arguments' => array('access content'),
+	'delivery callback' => 'custom_808_ajax_callback',
+  );
+  $items['user/%user/ajax/%'] = array(
+    'page callback' => 'user_ajax_fields',
+    'type' => MENU_CALLBACK,
+	'page arguments' => array(1,3),
+    'access arguments' => array('access content'),
+	'delivery callback' => 'custom_808_ajax_callback',
+  );
+  $items['user/money/charge'] = array(
+    'page callback' => 'custom_redirect',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+  );
+  $items['user/edit'] = array(
+    'page callback' => 'custom_redirect1',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+  );
+  $items['comment/prove/advisor/%'] = array(
+    'page callback' => 'cm_advisor_prove',
+    'type' => MENU_CALLBACK,
+	'page arguments' => array(3),
+    'access arguments' => array('access content'),
+	// 'delivery callback' => 'custom_808_ajax_callback',
+  );
+  $items['comment/prove/asker/%'] = array(
+    'page callback' => 'cm_asker_prove',
+    'type' => MENU_CALLBACK,
+	'page arguments' => array(3),
+    'access arguments' => array('access content'),
+	// 'delivery callback' => 'custom_808_ajax_callback',
+  );
+  $items['experts/information'] = array(
+    'page callback' => 'expert_information',
+    'type' => MENU_CALLBACK,
+	// 'page arguments' => array(2),
+    'access arguments' => array('access content'),
+	// 'delivery callback' => 'custom_808_ajax_callback',
+  );
+  $items['shop/product/json/filter'] = array(
+      'page callback' => 'exposed_filters',
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
+  $items['shop/product/json'] = array(
+      'page callback' => 'products',
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+  );
+  return $items;
+}
+
+/**
+ * Callback to return JSON of an specific view
+ */
+function custom_808_ajax_news_notify($view , $block) {
+	global $user;
+	// this part will filter the result for site users to not see the contents when he saw it before
+	if($user->uid != 0){
+		// retrives the nids that will appears to users
+		$query = "SELECT node.nid as nid FROM megapil_808_node node WHERE (( (node.status = '1') AND (node.type IN  ('education', 'article', 'publication', 'blog', 'event', 'designteam', 'poll', 'podcast', 'projectnew', 'project')) AND (node.created > :time) ))";
+		$queryParams = array(
+			':time' => time() - (10*24*60*60) );
+		$result = db_query($query, $queryParams)->fetchAll();
+		$selected = array();
+		//for every nid, we check the user history
+		foreach($result as $row){
+			$query = "SELECT COUNT(*) AS count FROM megapil_808_accesslog a WHERE (( (a.uid = :uid) AND (a.path = :path) ))";
+			$queryParams = array(
+				':uid' => $user->uid,
+				':path' => 'node/'. $row->nid );
+			$result = db_query($query, $queryParams)->fetchAll();
+			if($result[0]->count > 0){
+				$selected [] = $row->nid;
+			}
+		}
+	}
+	
+	//send the nids that user saw them before as contextual parameters to filter the result
+	$context = isset($selected)? implode('+',$selected): '';	
+	// $output = views_embed_view($view , $block, $context);
+	$output = views_embed_view('all_new', 'pnotify_news', $context);
+	drupal_json_output(array('status' => 0, 'data' => $output));
+	drupal_exit();
+	return $output;
+}
+
+/*
+ * Implement delivery callback for "ajax808/%/%" menu item
+ * see: "custom_808_ajax_news_notify()"
+ */
+function custom_808_ajax_callback($page_callback_result) {
+   // Only render content and validates return
+  $content = is_string($page_callback_result) ? $page_callback_result :   drupal_render($page_callback_result);
+  $html = '' . drupal_get_css() . drupal_get_js() . '' . $content . '';
+  print $html;
+  drupal_page_footer(); 
+}
+
+/**
+ * Implement hook_init
+ * this function adds the user id to "Drupal.setting" for use in js files in the site.
+ */
+function custom_808_ajax_init() {
+  global $user;
+  drupal_add_js(array('Uid' => $user->uid), 'setting');
+  
+	//if user is viewing his profile or not
+  	$path = drupal_get_path_alias();
+	$aliases = explode('/', $path);
+	if(isset($aliases[1]) && $aliases[0] == 'user' && is_numeric($aliases[1])){
+		if($user->uid == $aliases[1]){
+			drupal_add_js(array('SameUser' => true), 'setting');
+		}else{
+			drupal_add_js(array('SameUser' => false), 'setting');
+		}
+	}
+}
+
+
+function custom_redirect($param){
+	global $user;
+	if($user->uid){
+		if($param == 'charge'){header('Location: /user/'. $user->uid .'/money/charge');}
+		if($param == 'edit' || $param == 'messages'){
+			header('Location: /user/'. $user->uid .'/'. $param);
+		}
+	}else{
+		header('Location: /user');
+	}
+	die();
+}
+function custom_redirect1(){
+	global $user;
+	if($user->uid){
+		header('Location: /user/'. $user->uid .'/edit');
+	}else{
+		header('Location: /user');
+	}
+	die();
+}
+
+/**
+ * Callback to return JSON of an specific view
+ */
+function user_ajax_fields($user , $field) {
+	if($user->uid != 0){
+		$p = profile2_load_by_user($user);
+
+		if($field == 'picture'){
+			if(isset($user->$field)){
+				$output = theme('image_style', array('style_name' => 'userprofilrfront', 'path' => $user->picture->uri , 'alt' => $p['main']->field_full_name['und'][0]['value'] , 'title' => $p['main']->field_full_name['und'][0]['value'])); 
+			}else{
+				$output = '<img src="http://civil808.com/sites/all/themes/sara/images/profile2front.jpg" alt="'. $p['main']->field_full_name['und'][0]['value'] .'" title="'. $p['main']->field_full_name['und'][0]['value'] .'"></div>';
+			}
+		}
+	}
+	
+	drupal_json_output(array('status' => 0, 'data' => $output));
+	drupal_exit();
+	return $output;
+}
+
+function cm_advisor_prove($cid){
+	$comment = comment_load($cid);
+	if($comment->field_prove_advisor['und']['0']['value'] == 0){
+		$comment->field_prove_advisor['und']['0']['value'] = 1;
+		comment_save($comment);
+		
+		$node = node_load($comment->nid);
+		
+		/*send pm to comment author*/
+		$user = user_load($comment->uid);
+		if(!user_has_role(10, $user)){
+			$message = $user->name . ' عزیز، پاسخ شما به سوال ' . l('"' . $node->title . '"، ', '/node/' . $node->nid) . ' در سیستم پرسش و پاسخ 808، توسط مشاور سایت تایید شد. ';
+			send_pm($comment->uid, $message);
+		}
+		
+		/*send pm to question author*/
+		$user = user_load($node->uid);
+		$message = $user->name . '  عزیز، یکی از پاسخ های سوال  ' . l('"' . $node->title . '"، ', '/node/' . $node->nid) . ' که شما در سیستم پرسش و پاسخ 808 مطرح کرده بودید، توسط مشاور سایت تایید شد. ';
+		send_pm($node->uid, $message);
+
+		/*send pm to question followers*/
+		$message = 'کاربر گرامی، یکی از پاسخ های سوال ' . l('"' . $node->title . '"' , '/node/' . $node->nid) . ' که شما آن را در سایت 808 دنبال کرده اید، توسط مشاور سایت تایید شد. ';
+		$followers = question_followers($node, $comment);
+		if(!empty($followers) && count($followers) > 0){
+			foreach($followers as $uid){
+				send_pm($uid, $message);
+			}
+		}
+		
+		$data = array(1, $cid);
+	}else{
+		$data = array(0, $cid);
+	}
+	drupal_json_output($data);
+	drupal_exit();
+	return $data;
+}
+
+function cm_asker_prove($cid){
+	$comment = comment_load($cid);
+	if($comment->field_prove_asker['und']['0']['value'] == 0){
+		$comment->field_prove_asker['und']['0']['value'] = 1;
+		comment_save($comment);
+		$node = node_load($comment->nid);
+
+		/*send pm to comment author*/
+		$user = user_load($comment->uid);
+		$message = $user->name . ' عزیز، پاسخ شما به سوال ' . l('"' . $node->title . '"، ', '/node/' . $node->nid) . ' در سیستم پرسش و پاسخ 808، توسط نویسنده سوال تایید شد. ';
+		send_pm($comment->uid, $message);
+		
+		/*send pm to question followers*/
+		$message = 'کاربر گرامی، یکی از پاسخ های سوال ' . l('"' . $node->title . '"' , '/node/' . $node->nid) . ' که شما آن را در سایت 808 دنبال کرده اید، توسط نویسنده سوال تایید شد. ';
+		$followers = question_followers($node, $comment);
+		if(!empty($followers) && count($followers) > 0){
+			foreach($followers as $uid){
+				send_pm($uid, $message);
+			}
+		}
+
+		$data = array(1, $cid);
+	}else{
+		$data = array(0, $cid);
+	}
+	
+	drupal_json_output($data);
+	drupal_exit();
+	return $data;
+}
+
+function expert_information(){ 
+
+	$tid = $_POST['tid'];
+	$query = db_select('field_data_field_experts', 'e')
+							->fields('e' , array('entity_id'))
+							->condition('field_experts_tid', $tid)
+							->condition('entity_type', 'node')
+							->condition('bundle', 'questions')
+							->execute();
+	$question_count = $query->rowCount();
+	
+	$query = db_select('field_data_field_experts', 'e')
+							->fields('e' , array('entity_id'))
+							->condition('field_experts_tid', $tid)
+							->condition('entity_type', 'profile2')
+							->execute();
+	$user_count = $query->rowCount();
+	
+	$query = db_select('field_data_field_experts', 'e')
+							->fields('e' , array('entity_id'))
+							->condition('field_experts_tid', $tid)
+							->condition('entity_type', 'node')
+							->condition('bundle', 'architect')
+							->execute()->fetch();
+	
+	$node = node_load($query->entity_id);
+	/*
+	$body = $node->field_body['und'][0]['value'];
+	$body = strip_tags($body);
+	$body = substr($body, 0, 90);
+	$body .= ' ... ';
+	*/
+	$pic = $node->field_image['und'][0]['uri'];
+	$pic = substr($pic, strpos($pic, "/") + 1);
+	$pic = "http://civil808.com/sites/default/files/styles/120_120/public" . $pic;
+	$data = array(['question_count' => $question_count, 'user_count' => $user_count, 'pic' => $pic , 'tid' => $tid, 'nid' => $node->nid]);
+
+	drupal_json_output($data);
+	drupal_exit();
+	return $data;
+}
+
+/**
+ * use for exposed filters on shop/product page
+ * @return array
+ * function returns catalog taxonomies and their names for front-end
+*/
+function exposed_filters(){
+    /*select catalogs that have no parent*/
+    $query = db_select("taxonomy_term_data" , "taxonomy");
+    $query->join("taxonomy_term_hierarchy" , "parent" , "taxonomy.tid = parent.tid");
+    $query->fields("taxonomy" , array("tid" , "name"));
+    $query->condition("taxonomy.vid" , 22);
+    $query->condition("parent.parent" , 0);
+    $query->condition("parent.tid" , 2265 , '<>');
+    $results = $query->execute()->fetchAll();
+
+    $parent = array();
+    foreach ($results as $row){
+        $parent[$row->tid] = $row;
+        $parent[$row->tid]->children = array();
+    }
+
+    /*select catalogs that are children*/
+    $query = db_select("taxonomy_term_data" , "taxonomy");
+    $query->join("taxonomy_term_hierarchy" , "parent" , "taxonomy.tid = parent.tid");
+    $query->fields("taxonomy" , array("tid" , "name"));
+    $query->fields("parent" , array("parent"));
+    $query->condition("taxonomy.vid" , 22);
+    $query->condition("parent.parent" , 0 , "<>");
+    $query->condition("parent.parent" , 2265 , "<>");
+    $results = $query->execute()->fetchAll();
+
+    /*add each child to its parent*/
+    foreach ($results as $row){
+        $tid = new stdClass();
+        $tid->tid = $row->tid;
+        $tid->name = $row->name;
+        if(isset($parent[$row->parent])) array_push($parent[$row->parent]->children , $tid);
+    }
+
+    $taxonomies = array_values($parent);
+
+    drupal_json_output($taxonomies);
+    drupal_exit();
+    return $taxonomies;
+}
+
+/**
+ * return the list of products
+ * it is applying filters too
+ * @return array
+ * response is an array of:
+ * 1.total number of products
+ * 2.the page number that is used
+ * 3.product data for user
+ */
+function products(){
+    /*Select products form DB*/
+    $query = db_select("node" , "node");
+    $query->leftJoin("field_data_uc_product_image" , "product_image" , "node.nid = product_image.entity_id and product_image.delta = '0' ");
+    $query->join("file_managed" , "image" , "image.fid = product_image.uc_product_image_fid");
+    $query->join("uc_products" , "product" , "product.nid = node.nid");
+    $query->join("uc_product_stock" , "stock" , "product.model = stock.sku");
+    $query->fields("node" , array("nid" , "type" , "title" , "created" , "changed"));
+    $query->addField("image" , "uri" , "picture");
+    $query->addField("product" , "sell_price" , "price");
+    $query->addField("product" , "list_price" , "list_price");
+    $query->fields("stock" , array("active" , "stock"));
+    $query->condition("node.type" , array("product" , "product_kit") , "IN");
+    $query->condition("node.language" , "fa");
+    $query->condition("node.status" , 1);
+
+    $get_result = true; //flag for check if there is result or not
+
+    /*filter products according to input*/
+    if (isset($_GET['field']))                 filter('field', $query, $get_result);
+    if (isset($_GET['product_kind']))          filter('product_kind', $query, $get_result);
+    if (isset($_GET['exam']))                  filter('exam', $query, $get_result);
+    if (isset($_GET['education_kind']))        filter('education_kind', $query, $get_result);
+    if (isset($_GET['publication_name']))      filter('publication_name', $query, $get_result);
+    if (isset($_GET['academic_orientation']))  filter('academic_orientation', $query, $get_result);
+    if (isset($_GET['producer']))              filter('producer', $query, $get_result);
+    /*------------------------------------*/
+    /*filter just existing products*/
+    if(isset($_GET['stock'])){
+        /* active = 0 or active = 1 and stock > 0 */
+        $and_1 = db_and()->condition("stock.active" , 0);
+        $and_2 = db_and()->condition("stock.active" , 1)->condition("stock.stock" , 0 , '>');
+        $query->condition(db_or()->condition($and_1)->condition($and_2));
+    }
+    /*filter products that contain the value that search on it*/
+    if(isset($_GET['search'])){
+        $custom_nodes =  searched_product($_GET['search']);
+        if(empty($custom_nodes)) $get_result = false;
+        else $query->condition("node.nid" , $custom_nodes , "IN");
+    }
+
+    /**
+     * execute array of products if exist
+     * else return empty array
+     */
+    if($get_result) {
+        /*--------sort result on demand-------------*/
+        isset($_GET["sort"]) ? $sort = $_GET["sort"] : $sort = "node.nid";
+        isset($_GET["order"]) ? $order = $_GET["sort"] : $order = "DESC";
+        $query->orderBy($sort , $order);
+        /*------------------------------------------*/
+
+        $page = isset($_GET['page']) ? $_GET['page'] : 0; //use page for get part of result
+        $response["page"] = $page; //return the number of page for front-end
+        $count_query = clone($query); //copy the query before execute for getting the total number of products
+        $query->range(30 * $page, 30);
+
+        $products = $query->execute()->fetchAll();
+
+        /*get total number of products and return it for front-end*/
+        $count_query = $count_query->countQuery()->execute()->fetchField();
+        $response["count"] = (int)$count_query;
+
+        /*select the nids that has "test" taxonomy*/
+        $query = db_select("field_data_taxonomy_catalog" , "catalog");
+        $query->fields("catalog" , array("entity_id"));
+        $query->condition("catalog.taxonomy_catalog_tid" , 2308);
+        $forbiden_tids = $query->execute()->fetchAll();
+        $forbiden_nodes = array();
+        foreach($forbiden_tids as $row) array_push($forbiden_nodes , $row->entity_id);
+
+        /*post-processing for prepare final result*/
+        foreach($products as $key => $value){
+            /*remove "test" taxonomy*/
+            if(in_array($value->nid , $forbiden_nodes)){
+                unset($products[$key]);
+                continue;
+            }
+            /*change date format from time stamp*/
+        	$products[$key]->created = format_date($value->created);
+        	$products[$key]->changed = format_date($value->changed);
+
+        	/*convert picture to custom style*/
+        	$products[$key]->picture = image_style_url("300x300", $products[$key]->picture);
+
+        	/*check the each product is available or not and remove unnecessary fields*/
+        	if($value->active == 0 || ($value->active == 1 && $value->stock > 0)) $products[$key]->status = "available";
+            else $products[$key]->status = "unavailable";
+            unset($products[$key]->active);
+            unset($products[$key]->stock);
+        }
+    }
+    else
+        $products = array();
+
+    $response["products"] = $products;
+
+    drupal_json_output($response);
+    drupal_exit();
+    return $products;
+}
+/**
+ * search in products for the value that is searched for
+ * @return array
+ * return the array of nid that contain this value
+ */
+function searched_product($value){
+    $nodes = array();
+
+    /*search in product title*/
+    $query = db_select("node" , "node");
+    $query->fields("node" , array("nid"));
+    $query->condition("node.type" , array("product" , "product_kit") , "IN");
+    $query->condition('node.title', '%' . db_like($value) . '%' , 'LIKE');
+    $nid1 = $query->execute()->fetchAll();
+    foreach ($nid1 as $row) array_push($nodes , $row->nid);
+
+    /*search in product body field*/
+    $query = db_select("field_data_body" , "body");
+    $query->fields("body" , array("entity_id"));
+    $query->condition("body.bundle" , array("product" , "product_kit") , "IN");
+    $query->condition('body.body_value', '%' . db_like($value) . '%' , 'LIKE');
+    $nid2 = $query->execute()->fetchAll();
+    foreach ($nid2 as $row) array_push($nodes , $row->entity_id);
+
+    /*search in product custom content field*/
+    $query = db_select("field_data_field_costum_content" , "costum_content");
+    $query->fields("costum_content" , array("entity_id"));
+    $query->condition("costum_content.bundle" , array("product" , "product_kit") , "IN");
+    $query->condition('costum_content.field_costum_content_value', '%' . db_like($value) . '%' , 'LIKE');
+    $nid3 = $query->execute()->fetchAll();
+    foreach ($nid3 as $row) array_push($nodes , $row->entity_id);
+
+    /*search in catalog taxonomy name*/
+    $query = db_select("field_data_taxonomy_catalog" , "catalog");
+    $query->join("taxonomy_term_data" , "taxonomy_term" , "catalog.taxonomy_catalog_tid = taxonomy_term.tid");
+    $query->fields("catalog" , array("entity_id"));
+    $query->condition("catalog.bundle" , array("product" , "product_kit") , "IN");
+    $query->condition('taxonomy_term.name', '%' . db_like($value) . '%' , 'LIKE');
+    $nid4 = $query->execute()->fetchAll();
+    foreach ($nid4 as $row) array_push($nodes , $row->entity_id);
+
+    $nodes = array_unique($nodes);
+
+    return $nodes;
+}
+/**
+ * apply filters on products
+ * it filters query that is passed by reference
+ * no return
+*/
+function filter($name, &$query, &$get_result){
+    $tids = explode("," , $_GET[$name]);
+    $filter = db_select("field_data_taxonomy_catalog" , "catalog");
+    $filter->fields("catalog" , array("entity_id"));
+    $filter->condition("catalog.taxonomy_catalog_tid" , $tids , "IN");
+    $filter = $filter->execute()->fetchAll();
+    $nids = array();
+    foreach($filter as $row) array_push($nids , $row->entity_id);
+
+    if(!empty($nids))
+        $query->condition("node.nid" , $nids , "IN");
+    else
+        $get_result = false;
+}
+
+function moshavereh(){
+	$query = "SELECT 
+					f.delta as delta,
+					days.field_days_value as days, 
+					times.field_time_value as times, 
+					en.field_enable_value as enabled, 
+					stu.field_user_uid as stu
+					
+					FROM `field_data_field_classes_timing` f
+					
+					LEFT JOIN field_data_field_enable en ON en.entity_id = f.field_classes_timing_value and en.bundle = 'field_classes_timing'
+					LEFT JOIN field_data_field_time times  ON times.entity_id = f.field_classes_timing_value and times.bundle = 'field_classes_timing'
+					LEFT JOIN field_data_field_days days ON days.entity_id = f.field_classes_timing_value and days.bundle = 'field_classes_timing'
+					LEFT JOIN field_data_field_user stu ON stu.entity_id = f.field_classes_timing_value and stu.bundle = 'field_classes_timing'
+					
+					WHERE f.entity_type = 'user' and f.entity_id = :uid
+					ORDER BY delta";
+	$result = db_query($query, array(':uid' => $ostad_uid))->fetchAll();
+
+	$timing = array();
+	foreach($result as $row){
+		$timing[$row->days][] = $row;
+	}
+	$output = '
+		<form id="time-selection" method="post" action="/enrollment/time-selection" accept-charset="UTF-8">
+		<table class="classes-timing">
+			<tbody>
+		';
+	foreach($timing as $day_key => $day){
+		$output .= '<tr>';
+		$output .= '<td class="day-name">'. translate_days($day_key) .'</td>';
+		$odd = true;
+		foreach($day as $time){
+			$output .= ($odd)? '<td>' : '';
+			$output .= '<label class="'. (is_null($time->stu)? 'empty ' : 'busy ') . (($time->enabled == 1)? 'enabled ' : 'disabled ') .'">';
+			//$output .= '<input type="radio" name="time_select" value="select_'. $day_key .'_'. $time->times .'" '. (!is_null($time->stu) || ($time->enabled == 0)? 'disabled' : '') .' required>';
+			$output .= translate_hours($time->times);
+			$output .= '</label>';
+			$output .= ($odd)? '':'</td>' ;
+
+			$odd = ($odd)? false : true;
+		}
+		$output .= '</tr>';
+	}
+	$output .= '
+			</tbody>
+		</table>';
+	// if($bought > 0){
+	// $output .= '<input id="ostad-id" type="hidden" name="ostad_uid" value="'. $ostad_uid .'">
+	// <button type="submit" name="submit" value="Submit" class="btn btn-success">تایید و ارسال</button>';
+	// }
+	$output .= '</form>';
+
+	if($ostad_uid == 7262 || $ostad_uid == 1011){
+		$output = '<p class="hozouri">این کلاس به صورت گروهی برگزار می شود. برای شرکت در این کلاس با دفتر آموزشگاه با شماره های 44044497 - 44043963 تماس بگیرید.</p>' ;
+	}
+
+	$data = array('timing' => $output);
+
+	drupal_json_output($data);
+	drupal_exit();
+	return $data;
+}

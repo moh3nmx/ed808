@@ -1,0 +1,631 @@
+<?php
+/**
+ * Implements hook_schema().
+ */
+function custom_services_schema() {
+    $schema['api_app_version'] = array(
+        'fields' => array(
+            'id' => array(
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'description' => t('Primary Key : id'),
+            ),
+            'vid' => array(
+                'type' => 'varchar',
+                'length' => 40,
+                'not null' => TRUE,
+                'default' => '',
+                'description' => t('Unique Version of app'),
+            ),
+            'description' => array(
+                'type' => 'text',
+                'not null' => False,
+                'description' => t('Description about this version'),
+            ),
+            'force_update' => array(
+                'type' => 'int',
+                'not null' => False,
+                'default' => 0,
+                'description' => t('This version should update'),
+            ),
+            'update_link' => array(
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => False,
+                'default' => '',
+                'description' => t('This link of new version'),
+            ),
+            'ebook_key' => array(
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => False,
+                'default' => '',
+                'description' => t('key code for decrypt e-books'),
+            ),
+            'app_type' => array(
+                'type' => 'varchar',
+                'length' => 40,
+                'not null' => TRUE,
+                'default' => '',
+                'description' => t('The type of apps'),
+            ),
+            'created' => array(
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => 0,
+                'description' => 'Timestamp for when new version was created.',
+            ),
+        ),
+
+        'primary key' => array('id'),
+        'unique keys' => array(
+            'unique_fields' => array('vid' , 'app_type'),
+        ),
+    );
+
+    return $schema;
+}
+
+
+/**
+ * Create new database table {api_code_version}.
+ */
+function custom_services_update_7102() {
+    $schema['api_code_version'] = array(
+        'fields' => array(
+            'id' => array(
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'description' => t('Primary Key : id'),
+            ),
+            'url' => array(
+                'type' => 'varchar',
+                'length' => 100,
+                'not null' => TRUE,
+                'default' => '',
+                'description' => t('url api'),
+            ),
+            'source_name' => array(
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => True,
+                'default' => '',
+                'description' => t('The name of the request sender'),
+            ),
+            'version' => array(
+                'type' => 'varchar',
+                'length' => 20,
+                'not null' => True,
+                'default' => '',
+                'description' => t('The version number'),
+            ),
+            'last_function' => array(
+                'type' => 'varchar',
+                'length' => 100,
+                'not null' => TRUE,
+                'default' => '',
+                'description' => t('The name of the last function that is compatible for this version'),
+            ),
+            'created' => array(
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => 0,
+                'description' => 'Timestamp for when new version was created.',
+            ),
+        ),
+
+        'primary key' => array('id'),
+        'unique keys' => array(
+            'unique_fields' => array('url' , 'source_name' , 'version'),
+        ),
+    );
+    db_create_table('api_code_version', $schema['api_code_version']);
+}
+
+/**
+ * Add description field to {api_code_version} table.
+ */
+function custom_services_update_7103() {
+    $newCol = array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'description' => "description",
+    );
+    db_add_field('api_code_version', 'description', $newCol);
+}
+function custom_services_update_7104() {
+    $newCol = array(
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => True,
+        'default' => '',
+        'description' => t('The method of the request'),
+    );
+    db_add_field('api_code_version', 'method', $newCol);
+}
+
+/**
+ * Create new database table {relative_contents}.
+ */
+function custom_services_update_7105(){
+    $schema['relative_contents'] = array(
+        'fields' => array(
+            'id' => array(
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'description' => 'Primary Key - id',
+            ),
+            'entity_id' => array(
+                'type' => 'int',
+                'not null' => TRUE,
+                'unsigned' => TRUE,
+                'size' => 'small',
+                'description' => 'The if of entity',
+            ),
+            'entity_type' => array(
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => True,
+                'description' => 'The entity type',
+            ),
+            'bundle' => array(
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => True,
+                'description' => 'The bundle',
+            ),
+            'contents_id' => array(
+                'type' => 'text',
+                'size' => 'big',
+                'not null' => TRUE,
+                'description' => 'The contents that are relative in serialize type',
+            ),
+            'date' => array(
+                'type' => 'int',
+                'not null' => TRUE,
+                'description' => 'Timestamp for when an action has been happened.',
+            ),
+        ),
+
+        'primary key' => array('id'),
+    );
+    db_create_table('relative_contents', $schema['relative_contents']);
+}
+
+/**
+ * Create new database table {clapping}.
+ */
+function custom_services_update_7106(){
+    $schema['clapping'] = array(
+        'fields' => array(
+            'id' => array(
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'description' => 'Primary Key - id',
+            ),
+            'entity_type' => array(
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => True,
+                'description' => 'The entity type',
+            ),
+            'bundle' => array(
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => True,
+                'description' => 'The bundle',
+            ),
+            'entity_id' => array(
+                'type' => 'int',
+                'not null' => TRUE,
+                'unsigned' => TRUE,
+                'size' => 'small',
+                'description' => 'The if of entity',
+            ),
+            'uid' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'size' => 'small',
+                'not null' => TRUE,
+                'description' => t('User id'),
+            ),
+            'vote' => array(
+                'type' => 'int',
+                'size' => 'normal',
+                'not null' => TRUE,
+                'description' => t('vote pint.'),
+            ),
+            'date' => array(
+                'type' => 'int',
+                'not null' => TRUE,
+                'description' => 'Timestamp for when an action has been happened.',
+            ),
+        ),
+
+        'primary key' => array('id'),
+    );
+    db_create_table('clapping', $schema['clapping']);
+}
+
+/**
+ * Create new database table {user_temp_interests}.
+ */
+function custom_services_update_7107(){
+    $schema['user_temp_interests'] = array(
+        'fields' => array(
+            'id' => array(
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'description' => 'Primary Key - id',
+            ),
+            'uid' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'description' => t('User id'),
+            ),
+            'action' => array(
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => True,
+                'description' => 'The action that user has done',
+            ),
+            'entity_type' => array(
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => False,
+                'description' => 'The entity type',
+            ),
+            'bundle' => array(
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => False,
+                'description' => 'The bundle',
+            ),
+            'entity_id' => array(
+                'type' => 'int',
+                'not null' => False,
+                'unsigned' => TRUE,
+                'description' => 'The if of entity',
+            ),
+            'value' => array(
+                'type' => 'varchar',
+                'length' => 256,
+                'not null' => True,
+                'description' => 'The value of user`s action!',
+            ),
+            'date' => array(
+                'type' => 'int',
+                'not null' => TRUE,
+                'description' => 'Timestamp for when an action has been happened.',
+            ),
+        ),
+
+        'primary key' => array('id'),
+    );
+    db_create_table('user_temp_interests', $schema['user_temp_interests']);
+}
+
+/**
+ * Create new database table {user_jobs}.
+ */
+function custom_services_update_7108(){
+    $schema['user_jobs'] = array(
+        'fields' => array(
+            'jid' => array(
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'description' => 'Primary Key - id',
+            ),
+            'uid' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'description' => t('User id'),
+            ),
+            'type' => array(
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => True,
+                'description' => 'The type of the job',
+            ),
+            'title' => array(
+                'type' => 'varchar',
+                'length' => 256,
+                'not null' => False,
+                'description' => 'The title of the job',
+            ),
+            'position' => array(
+                'type' => 'varchar',
+                'length' => 256,
+                'not null' => False,
+                'description' => 'The position of the job',
+            ),
+            'location' => array(
+                'type' => 'varchar',
+                'length' => 256,
+                'not null' => False,
+                'description' => 'The location of the job',
+            ),
+            'start' => array(
+                'type' => 'int',
+                'not null' => TRUE,
+                'description' => 'Timestamp for when the job has started.',
+                'default' => 0
+            ),
+            'end' => array(
+                'type' => 'int',
+                'not null' => TRUE,
+                'description' => 'Timestamp for when the job has finished.',
+                'default' => 0
+            ),
+            'description' => array(
+                'type' => 'text',
+                'size' => 'normal',
+                'not null' => False,
+                'description' => 'The description of the job',
+            ),
+        ),
+
+        'primary key' => array('jid'),
+        'foreign keys' => array(
+            'uid' => array(
+                'table' => 'users',
+                'columns' => array('uid' => 'uid'),
+            ),
+        ),
+    );
+    db_create_table('user_jobs', $schema['user_jobs']);
+}
+
+/**
+ * Create new database table {user_socials}.
+ */
+function custom_services_update_7109(){
+    $schema['user_socials'] = array(
+        'fields' => array(
+            'sid' => array(
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'description' => 'Primary Key - id',
+            ),
+            'uid' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'description' => t('User id'),
+            ),
+            'name' => array(
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => True,
+                'description' => 'The name of the social',
+            ),
+            'link' => array(
+                'type' => 'varchar',
+                'length' => 256,
+                'not null' => True,
+                'description' => 'The link of the social',
+            ),
+            'created' => array(
+                'type' => 'int',
+                'not null' => TRUE,
+                'description' => 'Timestamp for when the social has created.',
+                'default' => 0
+            ),
+            'changed' => array(
+                'type' => 'int',
+                'not null' => TRUE,
+                'description' => 'Timestamp for when the social has changed.',
+                'default' => 0
+            ),
+            'deleted' => array(
+                'type' => 'int',
+                'not null' => TRUE,
+                'description' => 'Timestamp for when the social has deleted.',
+                'default' => 0
+            ),
+            'description' => array(
+                'type' => 'text',
+                'size' => 'normal',
+                'not null' => False,
+                'description' => 'The description of the social',
+            ),
+        ),
+
+        'primary key' => array('sid'),
+        'foreign keys' => array(
+            'uid' => array(
+                'table' => 'users',
+                'columns' => array('uid' => 'uid'),
+            ),
+        ),
+    );
+    db_create_table('user_socials', $schema['user_socials']);
+}
+
+/**
+ * Create new database table {user_log}.
+ */
+function custom_services_update_7110() {
+    $schema['user_log'] = array(
+        'fields' => array(
+            'id' => array(
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'description' => t('Primary Key : id'),
+            ),
+            'uid' => array(
+                'type' => 'int',
+                'not null' => TRUE,
+                'unsigned' => TRUE,
+                'default' => 0,
+                'description' => t('User id'),
+            ),
+            'action' => array(
+                'type' => 'varchar',
+                'length' => 256,
+                'not null' => TRUE,
+                'default' => '',
+                'description' => t("The action"),
+            ),
+            'url' => array(
+                'type' => 'varchar',
+                'length' => 100,
+                'not null' => False,
+                'default' => '',
+                'description' => t('url of action'),
+            ),
+            'method' => array(
+                'type' => 'varchar',
+                'length' => 50,
+                'not null' => False,
+                'default' => '',
+                'description' => t('method of url'),
+            ),
+            'entity_type' => array(
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => False,
+                'default' => '',
+                'description' => t('The entity type'),
+            ),
+            'bundle' => array(
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => False,
+                'default' => '',
+                'description' => t('The bundle of entity type'),
+            ),
+            'entity_id' => array(
+                'type' => 'int',
+                'not null' => False,
+                'unsigned' => TRUE,
+                'default' => 0,
+                'description' => t('The id of the entity that user has effected on it'),
+            ),
+            'status' => array(
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => TRUE,
+                'default' => '',
+                'description' => t("status of action"),
+            ),
+            'description' => array(
+                'type' => 'text',
+                'size' => 'normal',
+                'not null' => TRUE,
+                'description' => t('description'),
+            ),
+            'time' => array(
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => 0,
+                'description' => 'Timestamp for when an action has been happened.',
+            ),
+        ),
+
+        'primary key' => array('id'),
+        'foreign keys' => array(
+            'uid' => array(
+                'table' => 'users',
+                'columns' => array('uid' => 'uid'),
+            ),
+        ),
+    );
+    db_create_table('user_log', $schema['user_log']);
+}
+
+/**
+ * Create new database table {user_reset_pass_token}.
+ */
+function custom_services_update_7111() {
+    $schema['user_generate_url_token'] = array(
+        'fields' => array(
+            'id' => array(
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'description' => t('Primary Key : id'),
+            ),
+            'uid' => array(
+                'type' => 'int',
+                'not null' => TRUE,
+                'unsigned' => TRUE,
+                'default' => 0,
+                'description' => t('User id'),
+            ),
+            'email' => array(
+                'type' => 'varchar',
+                'length' => 256,
+                'not null' => TRUE,
+                'default' => '',
+                'description' => t("The email"),
+            ),
+            'token' => array(
+                'type' => 'varchar',
+                'length' => 256,
+                'not null' => False,
+                'default' => '',
+                'description' => t('token for user'),
+            ),
+            'used' => array(
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'size' => 'tiny',
+                'not null' => TRUE,
+                'description' => t('token is used'),
+            ),
+            'time' => array(
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => 0,
+                'description' => 'Timestamp for when an action has been happened.',
+            ),
+        ),
+
+        'primary key' => array('id'),
+        'foreign keys' => array(
+            'uid' => array(
+                'table' => 'users',
+                'columns' => array('uid' => 'uid'),
+            ),
+        ),
+    );
+    db_create_table('user_generate_url_token', $schema['user_generate_url_token']);
+}
+
+
+/*
+ * Implementation of hook_install()
+*/
+function custom_services_install() {
+    $success = drupal_install_schema('custom_services');
+    if ($success) {
+        drupal_set_message(st('custom_services module installed successfully.'));
+    }
+    else {
+        drupal_set_message(st('The installation of custom_services module failed.'), 'error');
+    }
+}
+
+/*
+ * Implementation of hook_uninstall()
+*/
+function custom_services_uninstall() {
+    $success = drupal_uninstall_schema('custom_services');
+    if ($success) {
+        drupal_set_message(st('custom_services module uninstalled successfully.'));
+    }
+    else {
+        drupal_set_message(st('The uninstall of custom_services module failed.'), 'error');
+    }
+}
