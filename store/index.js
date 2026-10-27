@@ -45,7 +45,7 @@ export const actions = {
       if (parsedCookie.token) {
         try {
           axios.defaults.withCredentials = true
-          let {data} = await axios.get('https://ed808.com:92/latin/user/login/nav_bar_info', {
+          let {data} = await axios.get('https://temp.ed808.com/api/latin/user/login/nav_bar_info', {
             headers: {
               'Content-Type': 'application/json',
               'Access-Control-Allow-Credentials' : true,

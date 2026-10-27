@@ -123,7 +123,7 @@
           axios.defaults.withCredentials = true;
           axios
             .post(
-              "https://ed808.com:92/latin/user/" + uid + "/follow",
+              "https://temp.ed808.com/api/latin/user/" + uid + "/follow",
               {
                 action: following ? "unfollow" : "follow"
               },

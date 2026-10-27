@@ -177,7 +177,7 @@
           this.submiting = true;
           this.$refs.recaptcha.reset();
           console.log(recaptchaToken)
-          axios.post('https://ed808.com:92/latin/web_form',
+          axios.post('https://temp.ed808.com/api/latin/web_form',
             {
               "nid" : 20162,
               "reCaptchaToken" : recaptchaToken,

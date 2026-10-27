@@ -48,7 +48,7 @@ export default {
     }
   },
   mounted() {
-    fetch('https://ed808.com:92/latin/contents?parameter[page]=0&parameter[limits]=5&parameter[sort]=updated&parameter[stick]=1')
+    fetch('https://temp.ed808.com/api/latin/contents?parameter[page]=0&parameter[limits]=5&parameter[sort]=updated&parameter[stick]=1')
       .then(response => response.json())
       .then((data) => {
           this.contents = data.contents

@@ -236,7 +236,7 @@ export default {
         this.$nuxt.$loading.start();
       });
 
-      fetch("https://ed808.com:92/latin/contents?" + url )
+      fetch("https://temp.ed808.com/api/latin/contents?" + url )
         .then(response => response.json())
         .then(data => {
           //set page in url query to the last possible page if it is bigger than content count

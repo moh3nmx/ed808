@@ -495,7 +495,7 @@ export default {
         axios.defaults.crossDomain = true;
         axios.defaults.withCredentials = true;
         axios
-          .post("https://ed808.com:92/latin/comments/" + cid + "/like", {
+          .post("https://temp.ed808.com/api/latin/comments/" + cid + "/like", {
 
             'action': dislike ? 'dislike' : ''
 
@@ -534,7 +534,7 @@ export default {
       axios.defaults.crossDomain = true;
       axios.defaults.withCredentials = true;
       axios
-        .post("https://ed808.com:92/latin/comments" ,{
+        .post("https://temp.ed808.com/api/latin/comments" ,{
           "nid" : this.nid,
           "pid" : pid,
           "body" : pid != 0 ? this.replyText.replace(/\n/g, "<br />") : this.commentText.replace(/\n/g, "<br />")
@@ -568,7 +568,7 @@ export default {
       axios.defaults.crossDomain = true;
       axios.defaults.withCredentials = true;
       axios
-        .put("https://ed808.com:92/latin/comments/"+cid ,{
+        .put("https://temp.ed808.com/api/latin/comments/"+cid ,{
           "body": this.editingCommentBody
         }, {
           headers: {
@@ -599,7 +599,7 @@ export default {
       axios.defaults.crossDomain = true;
       axios.defaults.withCredentials = true;
       axios
-        .delete("https://ed808.com:92/latin/comments/"+cid , {
+        .delete("https://temp.ed808.com/api/latin/comments/"+cid , {
           headers: {
             'Content-Type': 'application/json',
             'X-CSRF-Token' : this.getCookie('token')
@@ -636,7 +636,7 @@ export default {
       axios.defaults.crossDomain = true;
       axios.defaults.withCredentials = true;
       axios
-        .get("https://ed808.com:92/latin/contents/"+ this.nid +"/comments")
+        .get("https://temp.ed808.com/api/latin/contents/"+ this.nid +"/comments")
         .then(response => {
           this.commentErr = false;
           this.commentLoading = false;

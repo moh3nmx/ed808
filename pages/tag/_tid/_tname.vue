@@ -119,7 +119,7 @@
     },
     async asyncData({req, res, query, params, error}) {
       try {
-        const {data} = await axios.get('https://ed808.com:92/latin/tag/' + params.tid ,{
+        const {data} = await axios.get('https://temp.ed808.com/api/latin/tag/' + params.tid ,{
           withCredentials:true,
           headers: {
             'Cookie': req && req.headers && req.headers.cookie ? req.headers.cookie : '',
@@ -165,7 +165,7 @@
       })
       axios.defaults.crossDomain = true;
       axios.defaults.withCredentials  = true;
-      axios.get('https://ed808.com:92/latin/tag/' + this.tid + '/follower?parameter[page]=0&parameter[limits]=20')
+      axios.get('https://temp.ed808.com/api/latin/tag/' + this.tid + '/follower?parameter[page]=0&parameter[limits]=20')
         .then((data) => {
           this.followers = data.data.followers;
           console.log(data.data)
@@ -179,9 +179,9 @@
           return target.replace(new RegExp(search, 'g'), replacement);
         };
         return value != null ? value.replaceAll('href="http://api.ed808.com', 'href="https://ed808.com')
-          .replaceAll('href="https://ed808.com:92', 'href="https://ed808.com')
+          .replaceAll('href="https://temp.ed808.com/api', 'href="https://ed808.com')
           .replaceAll('href="http://ed808.com:92', 'href="https://ed808.com')
-          .replaceAll('="/sites', '="https://ed808.com:92/sites')
+          .replaceAll('="/sites', '="https://temp.ed808.com/api/sites')
           .replaceAll('="/node', '="https://ed808.com/node') : ''
       },
       replaceUrlSpace(value, reverse){
@@ -197,7 +197,7 @@
         if(this.getCookie("token") != null){
           axios.defaults.crossDomain = true;
           axios.defaults.withCredentials  = true;
-          await axios.post('https://ed808.com:92/latin/tag/' + this.tid + '/follow',
+          await axios.post('https://temp.ed808.com/api/latin/tag/' + this.tid + '/follow',
             {
               action : this.bookmarked? "unfollow": "follow",
             },

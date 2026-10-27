@@ -1219,7 +1219,7 @@
       axios.defaults.crossDomain = true;
       axios.defaults.withCredentials  = true;
       try {
-        let {data} = await axios.get('https://ed808.com:92/latin/user/'+ params.uid,
+        let {data} = await axios.get('https://temp.ed808.com/api/latin/user/'+ params.uid,
           {
             headers: {
               'Content-type': 'application/json',
@@ -1415,7 +1415,7 @@
           axios.defaults.withCredentials = true;
           axios
             .put(
-              "https://ed808.com:92/latin/user/" + this.uid, data, {
+              "https://temp.ed808.com/api/latin/user/" + this.uid, data, {
                 headers: {
                   "Content-Type": "application/json",
                   "X-CSRF-Token": this.getCookie("token"),
@@ -1449,7 +1449,7 @@
         axios.defaults.withCredentials = true;
         axios
           .put(
-            "https://ed808.com:92/latin/user/" + this.uid,
+            "https://temp.ed808.com/api/latin/user/" + this.uid,
             {
               "hash" : "50e185c2e0c2bc30215338db776022c92ecbc441fd933688c6bf4f274c863c60",
               "jobs" : {
@@ -1535,7 +1535,7 @@
         //needs validation here
         axios.defaults.crossDomain = true;
         axios.defaults.withCredentials  = true;
-        axios.post('https://ed808.com:92/latin/file?parameter[hash]=020042f70a981fd6806ecf5e53f2267b377da9d9f981e15297d70c3f7c2a87d0',
+        axios.post('https://temp.ed808.com/api/latin/file?parameter[hash]=020042f70a981fd6806ecf5e53f2267b377da9d9f981e15297d70c3f7c2a87d0',
           formData,
           {
             headers: {
@@ -1603,7 +1603,7 @@
 
         axios.defaults.crossDomain = true
         axios.defaults.withCredentials  = true
-        axios.put('https://ed808.com:92/latin/user/'+ this.uid,
+        axios.put('https://temp.ed808.com/api/latin/user/'+ this.uid,
           data,
           {
             headers: {
@@ -1738,7 +1738,7 @@
           axios.defaults.withCredentials = true;
           axios
             .post(
-              "https://ed808.com:92/latin/user/" + uid + "/follow",
+              "https://temp.ed808.com/api/latin/user/" + uid + "/follow",
               {
                 action: following ? "unfollow" : "follow"
               },

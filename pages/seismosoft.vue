@@ -185,7 +185,7 @@ export default {
   },
   mounted() {
     this.$store.state.backGround = "/images/laptop.jpg";
-    axios.get("https://ed808.com:92/latin/user/530").then(data => {
+    axios.get("https://temp.ed808.com/api/latin/user/530").then(data => {
       this.profile = data.data;
     });
   }

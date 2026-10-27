@@ -214,7 +214,7 @@ export default {
       }
       axios
         .post(
-          "https://ed808.com:92/latin/web_form",
+          "https://temp.ed808.com/api/latin/web_form",
           {
             nid: 19768,
             reCaptchaToken: "admin@ed808",

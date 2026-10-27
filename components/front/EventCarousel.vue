@@ -100,7 +100,7 @@ export default {
   mounted() {
     this.handleResize()
     window.removeEventListener('resize', this.handleResize())
-    axios.get('https://ed808.com:92/latin/contents/list/event')
+    axios.get('https://temp.ed808.com/api/latin/contents/list/event')
       .then((data) => {
         let events = []
         let spec = []

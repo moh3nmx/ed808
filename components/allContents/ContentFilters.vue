@@ -100,7 +100,7 @@ export default {
     window.addEventListener('scroll', function(e){
       vm.scrolled = window.scrollY
     })
-    fetch('https://ed808.com:92/latin/contents/all/filters')
+    fetch('https://temp.ed808.com/api/latin/contents/all/filters')
       .then(response => response.json())
       .then((data) => {
         this.filters = data
@@ -114,7 +114,7 @@ export default {
 
         // setTimeout(() => {this.filtersLoading = false}, 300)
     })
-    fetch('https://ed808.com:92/latin/tag/home/list')
+    fetch('https://temp.ed808.com/api/latin/tag/home/list')
       .then(response => response.json())
       .then((data) => {
         this.tags = data

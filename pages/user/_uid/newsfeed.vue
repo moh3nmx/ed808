@@ -3,11 +3,11 @@
     <div class="left-rail-container">
       <div class="profile-rail-card">
         <div class="user-info">
-          <div class="profile-cover" style="background-image: url(https://ed808.com:92/sites/default/files/styles/1360x500_blur/public/field/image/user_174_68fb4c02.jpg?itok=huvPMkt7);">
+          <div class="profile-cover" style="background-image: url(https://temp.ed808.com/api/sites/default/files/styles/1360x500_blur/public/field/image/user_174_68fb4c02.jpg?itok=huvPMkt7);">
           </div>
           <nuxt-link to="" target="_blank">
             <md-avatar class="md-large-tag">
-              <img src="https://ed808.com:92/sites/default/files/styles/200x200/public/pictures/picture-174-1557748677.jpg?itok=_vFPtXF5" alt="user_image" />
+              <img src="https://temp.ed808.com/api/sites/default/files/styles/200x200/public/pictures/picture-174-1557748677.jpg?itok=_vFPtXF5" alt="user_image" />
             </md-avatar>
             <div class="colored-shadow"></div>
           </nuxt-link>
@@ -54,7 +54,7 @@
             <li class="suggestion-member">
               <nuxt-link to="" target="_blank">
                 <md-avatar class="md-large-tag suggestion">
-                  <img src="https://ed808.com:92/sites/default/files/styles/200x200/public/pictures/picture-174-1557748677.jpg?itok=_vFPtXF5" alt="user_image" />
+                  <img src="https://temp.ed808.com/api/sites/default/files/styles/200x200/public/pictures/picture-174-1557748677.jpg?itok=_vFPtXF5" alt="user_image" />
                 </md-avatar>
                 <div class="colored-shadow"></div>
               </nuxt-link>
@@ -70,7 +70,7 @@
             <li class="suggestion-member">
               <nuxt-link to="" target="_blank">
                 <md-avatar class="md-large-tag suggestion">
-                  <img src="https://ed808.com:92/sites/default/files/styles/200x200/public/pictures/picture-174-1557748677.jpg?itok=_vFPtXF5" alt="user_image" />
+                  <img src="https://temp.ed808.com/api/sites/default/files/styles/200x200/public/pictures/picture-174-1557748677.jpg?itok=_vFPtXF5" alt="user_image" />
                 </md-avatar>
                 <div class="colored-shadow"></div>
               </nuxt-link>
@@ -86,7 +86,7 @@
             <li class="suggestion-member">
               <nuxt-link to="" target="_blank">
                 <md-avatar class="md-large-tag suggestion">
-                  <img src="https://ed808.com:92/sites/default/files/styles/200x200/public/pictures/picture-174-1557748677.jpg?itok=_vFPtXF5" alt="user_image" />
+                  <img src="https://temp.ed808.com/api/sites/default/files/styles/200x200/public/pictures/picture-174-1557748677.jpg?itok=_vFPtXF5" alt="user_image" />
                 </md-avatar>
                 <div class="colored-shadow"></div>
               </nuxt-link>

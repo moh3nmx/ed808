@@ -41,7 +41,7 @@
     mounted(){
       axios.defaults.withCredentials = true
       axios.defaults.crossDomain = true
-      axios.get('https://ed808.com:92/latin/tag?parameter[page]=0&parameter[limits]=1000')
+      axios.get('https://temp.ed808.com/api/latin/tag?parameter[page]=0&parameter[limits]=1000')
         .then((data)=>{
           // console.log(data.data)
           let tags = []

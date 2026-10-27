@@ -120,7 +120,7 @@ export default {
         cookie = req.headers.cookie
       }
       let { data } = await axios({
-        url: "https://ed808.com:92/latin/tag",
+        url: "https://temp.ed808.com/api/latin/tag",
         method: 'get',
         headers:  {
           'Cookie' :  cookie,
@@ -150,7 +150,7 @@ export default {
       this.tags = []
       axios.defaults.withCredentials = true
       axios.defaults.crossDomain = true
-      axios.get(`https://ed808.com:92/latin/tag?parameter[page]=${this.page-1}&parameter[limits]=30&parameter[search]=${this.searchText}&parameter[sort]=${this.sortBy}`)
+      axios.get(`https://temp.ed808.com/api/latin/tag?parameter[page]=${this.page-1}&parameter[limits]=30&parameter[search]=${this.searchText}&parameter[sort]=${this.sortBy}`)
       .then((data)=>{
         console.log(data.data)
         this.tags = data.data.tags,

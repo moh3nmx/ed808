@@ -194,7 +194,7 @@
           localStorage.setItem('callback', this.$route.path)
         }
         window.location.replace(
-          'https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77gasbcb9ngw6d&redirect_uri=https://ed808.com:92/linkedin/join&scope=r_emailaddress r_liteprofile'
+          'https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77gasbcb9ngw6d&redirect_uri=https://temp.ed808.com/api/linkedin/join&scope=r_emailaddress r_liteprofile'
         )
       },
       hideLogin(){
@@ -221,7 +221,7 @@
 
         axios.defaults.crossDomain = true;
         axios.defaults.withCredentials = true;
-        await axios.post('https://ed808.com:92/latin/user/login',
+        await axios.post('https://temp.ed808.com/api/latin/user/login',
           {
             hash : "50e185c2e0c2bc30215338db776022c92ecbc441fd933688c6bf4f274c863c60",
             username_email : this.form.username_email,

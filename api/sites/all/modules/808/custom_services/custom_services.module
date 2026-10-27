@@ -1380,7 +1380,7 @@ function hash_true($hash , $resource){
 }
 function generate_file_address($url){
     $url = substr($url , 8);
-    $url = "https://ed808.com:92/sites/default/files" . $url;
+    $url = "https://temp.ed808.com/api/sites/default/files" . $url;
     return $url;
 }
 function reCaptcha($key){

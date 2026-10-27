@@ -89,7 +89,7 @@ export default {
     }
   },
   mounted(){
-    fetch('https://ed808.com:92/latin/contents/list/services?parameter[limits]=3')
+    fetch('https://temp.ed808.com/api/latin/contents/list/services?parameter[limits]=3')
       .then(response => response.json())
       .then((data) => {
         this.products = data
@@ -100,9 +100,9 @@ export default {
           "uid": "530",
           "created": "June 3, 2019",
           "changed": "July 2, 2019",
-          "picture": "https://ed808.com:92/sites/default/files/styles/300x200/public/fields/image/node_19893_620498b1.png?itok=lbqTvS3C",
+          "picture": "https://temp.ed808.com/api/sites/default/files/styles/300x200/public/fields/image/node_19893_620498b1.png?itok=lbqTvS3C",
           "author_name": "Stelios Antoniou",
-          "author_pic": "https://ed808.com:92/sites/default/files/styles/200x200/public/pictures/picture-530-1560515090.jpg?itok=UX8IXTkI",
+          "author_pic": "https://temp.ed808.com/api/sites/default/files/styles/200x200/public/pictures/picture-530-1560515090.jpg?itok=UX8IXTkI",
         }
         this.products.push(sesimo)
     })

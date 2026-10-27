@@ -68,7 +68,7 @@ if(isset($_POST['amount'])) {
   &fromCurrencyCode=$currency
   &toCurrencyCode=978
   &orderNumber=$order_id
-  &callback=https://ed808.com:92/admin/yekpay/comeback
+  &callback=https://temp.ed808.com/api/admin/yekpay/comeback
   &firstName=$firstName
   &lastName=$lastName
   &email=$email

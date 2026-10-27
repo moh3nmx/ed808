@@ -248,7 +248,7 @@
       let month = new Date().getMonth();
       let year = new Date().getFullYear();
       try {
-        let { data } = await axios.get(`https://ed808.com:92/latin/contents/all/event?parameter[year]=${year}&parameter[month]=${month+1}`)
+        let { data } = await axios.get(`https://temp.ed808.com/api/latin/contents/all/event?parameter[year]=${year}&parameter[month]=${month+1}`)
         return {
           month: month,
           year: year,
@@ -272,7 +272,7 @@
         this.month = month
         this.loadingEvents = true
         this.events = []
-        axios.get(`https://ed808.com:92/latin/contents/all/event?parameter[year]=${this.year}&parameter[month]=${this.month+1}`)
+        axios.get(`https://temp.ed808.com/api/latin/contents/all/event?parameter[year]=${this.year}&parameter[month]=${this.month+1}`)
           .then((data)=>{
             this.events = data.data
             this.loadingEvents = false
@@ -301,7 +301,7 @@
         this.year = year
         this.loadingEvents = true
         this.events = []
-        axios.get(`https://ed808.com:92/latin/contents/all/event?parameter[year]=${this.year}&parameter[month]=${this.month+1}`)
+        axios.get(`https://temp.ed808.com/api/latin/contents/all/event?parameter[year]=${this.year}&parameter[month]=${this.month+1}`)
           .then((data)=>{
             this.events = data.data
             this.loadingEvents = false

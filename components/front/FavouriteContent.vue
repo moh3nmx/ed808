@@ -47,7 +47,7 @@
       if (this.$store.getters.getUid) {
         axios.defaults.crossDomain = true;
         axios.defaults.withCredentials  = true;
-        axios.get('https://ed808.com:92/latin/contents/user/interest?parameter[page]=0&parameter[limits]=4')
+        axios.get('https://temp.ed808.com/api/latin/contents/user/interest?parameter[page]=0&parameter[limits]=4')
           .then((data) => {
             this.contents = data.data.contents;
           })
@@ -56,7 +56,7 @@
         //get popular contents
         axios.defaults.crossDomain = true;
         axios.defaults.withCredentials  = true;
-        axios.get('https://ed808.com:92/latin/test?parameter[page]=0&parameter[limits]=4&parameter[query]=picture,meta_description,topics,clap,comment&parameter[sort]=popular')
+        axios.get('https://temp.ed808.com/api/latin/test?parameter[page]=0&parameter[limits]=4&parameter[query]=picture,meta_description,topics,clap,comment&parameter[sort]=popular')
           .then((data) => {
             this.contents = data.data.contents;
           })

@@ -97,7 +97,7 @@
     },
     mounted() {
       //get recent posts to display
-      axios.get('https://ed808.com:92/latin/contents?parameter[page]=0&parameter[limits]=6&parameter[sort]=newest&parameter[stick]=-1')
+      axios.get('https://temp.ed808.com/api/latin/contents?parameter[page]=0&parameter[limits]=6&parameter[sort]=newest&parameter[stick]=-1')
         .then((data) => {
           this.contents = data.data.contents;
           this.loading = false;

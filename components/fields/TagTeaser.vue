@@ -84,7 +84,7 @@ export default {
         this.flw = !this.flw
         axios.defaults.crossDomain = true;
         axios.defaults.withCredentials  = true;
-        await axios.post('https://ed808.com:92/latin/tag/' + tid + '/follow',
+        await axios.post('https://temp.ed808.com/api/latin/tag/' + tid + '/follow',
           {
             action : !this.flw ? "unfollow": "follow",
           },

@@ -149,7 +149,7 @@
       store.state.backGround = '/images/login-bg.jpg'
       if (query.hasOwnProperty('token')) {
         try {
-          const {data} = await axios.post('https://ed808.com:92/latin/user/login_with_link', {
+          const {data} = await axios.post('https://temp.ed808.com/api/latin/user/login_with_link', {
               "token": query.token
             }, {
               headers: {
@@ -184,7 +184,7 @@
         this.setCookie('token', this.data.token , 23)
       }
       // let query = this.$route.query
-      // axios.post('https://ed808.com:92/latin/user/login_with_link', {
+      // axios.post('https://temp.ed808.com/api/latin/user/login_with_link', {
       //         "token": query.token
       //       }, {
       //         headers: {
@@ -215,7 +215,7 @@
         this.showError= false
         this.$v.$touch()
         if (!this.$v.form.email.$invalid) {
-          axios.post('https://ed808.com:92/latin/user/password_reset', {
+          axios.post('https://temp.ed808.com/api/latin/user/password_reset', {
               "hash" : "50e185c2e0c2bc30215338db776022c92ecbc441fd933688c6bf4f274c863c60",
               "reCaptchaToken" : recaptchaToken,
               "email" : this.form.email
@@ -239,7 +239,7 @@
         if (!this.$v.form.password.$invalid && !this.$v.form.rePassword.$invalid) {
           this.sending = true
           this.rulesErr = false
-          axios.put('https://ed808.com:92/latin/user/'+this.$store.state.user.uid,
+          axios.put('https://temp.ed808.com/api/latin/user/'+this.$store.state.user.uid,
             {
               "hash" : "50e185c2e0c2bc30215338db776022c92ecbc441fd933688c6bf4f274c863c60",
               "request_pass" : true,

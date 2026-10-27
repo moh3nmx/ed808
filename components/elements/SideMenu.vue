@@ -194,7 +194,7 @@ export default {
     logUserOut(){
       axios.defaults.crossDomain = true
       axios.defaults.withCredentials  = true
-      axios.post('https://ed808.com:92/latin/user/logout',
+      axios.post('https://temp.ed808.com/api/latin/user/logout',
         true,{
           headers:{
             'Content-type': 'application/json',

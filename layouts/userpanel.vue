@@ -269,7 +269,7 @@ export default {
       axios.defaults.withCredentials = true;
       axios
         .post(
-          "https://ed808.com:92/latin/file?parameter[hash]=020042f70a981fd6806ecf5e53f2267b377da9d9f981e15297d70c3f7c2a87d0",
+          "https://temp.ed808.com/api/latin/file?parameter[hash]=020042f70a981fd6806ecf5e53f2267b377da9d9f981e15297d70c3f7c2a87d0",
           formData,
           {
             headers: {
@@ -326,7 +326,7 @@ export default {
       axios.defaults.withCredentials = true;
       axios
         .put(
-          "https://ed808.com:92/latin/user/" + this.$route.params.uid,
+          "https://temp.ed808.com/api/latin/user/" + this.$route.params.uid,
           data,
           {
             headers: {
@@ -454,7 +454,7 @@ export default {
     async getProfile() {
       try {
         let { data } = await axios.get(
-          "https://ed808.com:92/latin/user/" + this.$route.params.uid,
+          "https://temp.ed808.com/api/latin/user/" + this.$route.params.uid,
           {
             headers: {
               "Content-type": "application/json",

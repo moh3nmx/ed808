@@ -61,7 +61,7 @@
 
         <hr>
 
-        <form action="https://ed808.com:92/admin/yekpay" method="post" ref="payForm" @submit.prevent="submitForm">
+        <form action="https://temp.ed808.com/api/admin/yekpay" method="post" ref="payForm" @submit.prevent="submitForm">
           <md-field>
             <label for="currency">
               Your Currency

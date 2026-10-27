@@ -138,7 +138,7 @@
         this.setCookie('token', this.$route.query.token , 23)
 
         // Get User Data For Updating Navbar
-        axios.get('https://ed808.com:92/latin/user/login/nav_bar_info', {
+        axios.get('https://temp.ed808.com/api/latin/user/login/nav_bar_info', {
           headers: {
             'Content-Type': 'application/json',
           }
@@ -202,7 +202,7 @@
         if (!this.$v.$invalid && this.form.rules) {
           this.sending = true
           this.rulesErr = false
-          axios.put('https://ed808.com:92/latin/user/'+this.$store.state.user.uid,
+          axios.put('https://temp.ed808.com/api/latin/user/'+this.$store.state.user.uid,
             {
               "hash" : "50e185c2e0c2bc30215338db776022c92ecbc441fd933688c6bf4f274c863c60",
               "from_linkedin" : true,

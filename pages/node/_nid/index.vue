@@ -585,7 +585,7 @@ export default {
         cookie = req.headers.cookie
       }
       const { data } = await axios({
-        url: "https://ed808.com:92/latin/contents/" + params.nid,
+        url: "https://temp.ed808.com/api/latin/contents/" + params.nid,
         method: 'get',
         headers:  {
           'Cookie' :  cookie,
@@ -663,7 +663,7 @@ export default {
         axios.defaults.withCredentials = true;
         axios
           .post(
-            "https://ed808.com:92/latin/contents/" + this.nid + "/clap",
+            "https://temp.ed808.com/api/latin/contents/" + this.nid + "/clap",
             {},
             {
               headers: {
@@ -697,7 +697,7 @@ export default {
         axios.defaults.withCredentials = true;
         axios
           .post(
-            "https://ed808.com:92/latin/contents/" + this.nid + "/bookmark",
+            "https://temp.ed808.com/api/latin/contents/" + this.nid + "/bookmark",
             {
               action: !this.node_content.user_bookmark ? "unbookmark" : "bookmark"
             },
@@ -727,9 +727,9 @@ export default {
       return value != null
         ? value
             .replaceAll('href="http://api.ed808.com', 'href="https://ed808.com')
-            .replaceAll('href="https://ed808.com:92', 'href="https://ed808.com')
+            .replaceAll('href="https://temp.ed808.com/api', 'href="https://ed808.com')
             .replaceAll('href="http://ed808.com:92', 'href="https://ed808.com')
-            .replaceAll('="/sites', '="https://ed808.com:92/sites')
+            .replaceAll('="/sites', '="https://temp.ed808.com/api/sites')
             .replaceAll('="/node', '="https://ed808.com/node')
         : "";
     },
@@ -738,7 +738,7 @@ export default {
       this.relatedLoading = true
       axios
         .get(
-          "https://ed808.com:92/latin/contents/" +
+          "https://temp.ed808.com/api/latin/contents/" +
             this.nid +
             "/relative?parameter[page]=1"
         )

@@ -59,7 +59,7 @@ export default {
     getNews(){
       if(this.nid != 0){
         this.loading = true
-        fetch("https://ed808.com:92/latin/contents/" + this.nid)
+        fetch("https://temp.ed808.com/api/latin/contents/" + this.nid)
           .then(response => response.json())
           .then((data) => {
             this.news = data.content

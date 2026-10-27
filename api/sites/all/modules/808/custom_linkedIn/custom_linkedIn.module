@@ -50,7 +50,7 @@ function linked_in_join(){
         CURLOPT_TIMEOUT => 30,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => "grant_type=authorization_code&code=" . $code . "&redirect_uri=https://ed808.com:92/linkedin/join&client_id=77gasbcb9ngw6d&client_secret=eLNyPD8CUAuMBf0d",
+        CURLOPT_POSTFIELDS => "grant_type=authorization_code&code=" . $code . "&redirect_uri=https://temp.ed808.com/api/linkedin/join&client_id=77gasbcb9ngw6d&client_secret=eLNyPD8CUAuMBf0d",
         CURLOPT_HTTPHEADER => array(
             "content-type: application/x-www-form-urlencoded"
         ),
@@ -229,7 +229,7 @@ function linked_in_connect(){
         CURLOPT_TIMEOUT => 30,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => "grant_type=authorization_code&code=" . $code . "&redirect_uri=https://ed808.com:92/linkedin/connect&client_id=77gasbcb9ngw6d&client_secret=eLNyPD8CUAuMBf0d",
+        CURLOPT_POSTFIELDS => "grant_type=authorization_code&code=" . $code . "&redirect_uri=https://temp.ed808.com/api/linkedin/connect&client_id=77gasbcb9ngw6d&client_secret=eLNyPD8CUAuMBf0d",
         CURLOPT_HTTPHEADER => array(
             "content-type: application/x-www-form-urlencoded"
         ),

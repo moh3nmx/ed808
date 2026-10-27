@@ -383,7 +383,7 @@
         this.sending = true
         axios.defaults.crossDomain = true;
         axios.defaults.withCredentials = true;
-        await axios.put('https://ed808.com:92/latin/user/'+ this.uid,
+        await axios.put('https://temp.ed808.com/api/latin/user/'+ this.uid,
           {
             hash : "50e185c2e0c2bc30215338db776022c92ecbc441fd933688c6bf4f274c863c60",
             current_password: this.form.current_password,
@@ -444,7 +444,7 @@
         }
         axios.defaults.crossDomain = true;
         axios.defaults.withCredentials  = true;
-        axios.put('https://ed808.com:92/latin/user/'+ this.uid, data,
+        axios.put('https://temp.ed808.com/api/latin/user/'+ this.uid, data,
           {
             headers: {
               'Content-type': 'application/json',
@@ -508,7 +508,7 @@
         //needs validation here
         axios.defaults.crossDomain = true;
         axios.defaults.withCredentials  = true;
-        axios.post('https://ed808.com:92/latin/file?parameter[hash]=020042f70a981fd6806ecf5e53f2267b377da9d9f981e15297d70c3f7c2a87d0',
+        axios.post('https://temp.ed808.com/api/latin/file?parameter[hash]=020042f70a981fd6806ecf5e53f2267b377da9d9f981e15297d70c3f7c2a87d0',
           formData,
           {
             headers: {
@@ -564,7 +564,7 @@
 
         axios.defaults.crossDomain = true
         axios.defaults.withCredentials  = true
-        axios.put('https://ed808.com:92/latin/user/'+ this.uid,
+        axios.put('https://temp.ed808.com/api/latin/user/'+ this.uid,
           data,
           {
             headers: {
@@ -698,7 +698,7 @@
         else {
           axios.defaults.crossDomain = true;
           axios.defaults.withCredentials  = true;
-          axios.get('https://ed808.com:92/latin/user/'+ this.uid,
+          axios.get('https://temp.ed808.com/api/latin/user/'+ this.uid,
             {
               headers: {
                 'Content-type': 'application/json'

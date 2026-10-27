@@ -151,7 +151,7 @@
                 form.append('image', file)
                 axios.defaults.withCredentials = true
                 axios({
-                  url: 'https://ed808.com:92/latin/file/upload_image', // server url. If the url is empty then the base64 returns
+                  url: 'https://temp.ed808.com/api/latin/file/upload_image', // server url. If the url is empty then the base64 returns
                   method: 'POST',
                   data : form,
                   headers: {
@@ -281,7 +281,7 @@
 
           axios.defaults.crossDomain = true
           axios.defaults.withCredentials  = true
-          axios.post('https://ed808.com:92/latin/contents',
+          axios.post('https://temp.ed808.com/api/latin/contents',
             data,
             {
               headers: {
@@ -354,7 +354,7 @@
           form.append('image', file)
           axios.defaults.withCredentials = true
           axios({
-            url: 'https://ed808.com:92/latin/file/upload_image', // server url. If the url is empty then the base64 returns
+            url: 'https://temp.ed808.com/api/latin/file/upload_image', // server url. If the url is empty then the base64 returns
             method: 'POST',
             data : form,
             headers: {
@@ -390,7 +390,7 @@
         }
       },
       getTopics(){
-        axios.get('https://ed808.com:92/latin/contents/list/topics')
+        axios.get('https://temp.ed808.com/api/latin/contents/list/topics')
           .then(data=>{
             this.topics = data.data
           })

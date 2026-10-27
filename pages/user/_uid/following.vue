@@ -48,7 +48,7 @@
       console.log(this.$route.params.uid)
       axios.defaults.crossDomain = true;
       axios.defaults.withCredentials  = true;
-      axios.get(`https://ed808.com:92/latin/user/${this.$route.params.uid}/following?parameter[sort]=time&parameter[sort_dir]=ASC&parameter[page]=0&parameter[limits]=10`,
+      axios.get(`https://temp.ed808.com/api/latin/user/${this.$route.params.uid}/following?parameter[sort]=time&parameter[sort_dir]=ASC&parameter[page]=0&parameter[limits]=10`,
         {},
         {
           headers: {

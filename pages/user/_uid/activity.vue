@@ -217,7 +217,7 @@
         if (files.length > 0) {
           axios.defaults.withCredentials = true
           axios({
-            url: 'https://ed808.com:92/latin/file/delete_image', // server url. If the url is empty then the base64 returns
+            url: 'https://temp.ed808.com/api/latin/file/delete_image', // server url. If the url is empty then the base64 returns
             method: 'POST',
             data : {
               names: files
@@ -250,7 +250,7 @@
         if(this.sameUser) {
           axios.defaults.crossDomain = true
           axios.defaults.withCredentials  = true
-          axios.get('https://ed808.com:92/latin/user/'+ this.uid + '/bookmark?parameter[page]='+ this.page +'&parameter[limits]=' + 10 ,
+          axios.get('https://temp.ed808.com/api/latin/user/'+ this.uid + '/bookmark?parameter[page]='+ this.page +'&parameter[limits]=' + 10 ,
             {
               headers: {
                 'Content-type': 'application/json'
@@ -270,7 +270,7 @@
         if(this.sameUser) {
           axios.defaults.crossDomain = true
           axios.defaults.withCredentials  = true
-          axios.get('https://ed808.com:92/latin/user/'+ this.uid + '/favorite_content?parameter[page]='+ this.page +'&parameter[limits]=' + 10 ,
+          axios.get('https://temp.ed808.com/api/latin/user/'+ this.uid + '/favorite_content?parameter[page]='+ this.page +'&parameter[limits]=' + 10 ,
             {
               headers: {
                 'Content-type': 'application/json'
@@ -298,7 +298,7 @@
       getUserPosts(){
         axios.defaults.crossDomain = true
         axios.defaults.withCredentials  = true
-        axios.get('https://ed808.com:92/latin/user/'+ this.uid + '/posts?parameter[page]='+ this.page +'&parameter[limits]=' + 10 + '&parameter[publish]=0',
+        axios.get('https://temp.ed808.com/api/latin/user/'+ this.uid + '/posts?parameter[page]='+ this.page +'&parameter[limits]=' + 10 + '&parameter[publish]=0',
           {
             headers: {
               'Content-type': 'application/json'
@@ -328,7 +328,7 @@
       getUserComments(){
         axios.defaults.crossDomain = true
         axios.defaults.withCredentials  = true
-        axios.get('https://ed808.com:92/latin/user/'+ this.uid + '/wrote_comment?parameter[page]=0&parameter[limits]=10',
+        axios.get('https://temp.ed808.com/api/latin/user/'+ this.uid + '/wrote_comment?parameter[page]=0&parameter[limits]=10',
           {
             headers: {
               'Content-type': 'application/json'
@@ -358,7 +358,7 @@
       getAllTags(){
         axios.defaults.crossDomain = true
         axios.defaults.withCredentials  = true
-        axios.get('https://ed808.com:92/latin/tag?parameter[page]=0&parameter[limits]=10000')
+        axios.get('https://temp.ed808.com/api/latin/tag?parameter[page]=0&parameter[limits]=10000')
           .then(data=>{
             this.allTags= data.data.tags
             let tags = []

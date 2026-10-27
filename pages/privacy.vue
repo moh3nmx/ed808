@@ -33,7 +33,7 @@ export default {
   async asyncData({ params, error }) {
     try {
       const { data } = await axios.get(
-        "https://ed808.com:92/latin/page/20166"
+        "https://temp.ed808.com/api/latin/page/20166"
       );
       if (data) {
         return {

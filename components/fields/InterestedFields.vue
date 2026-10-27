@@ -69,7 +69,7 @@
         console.log(topics)
         axios.defaults.crossDomain = true;
         axios.defaults.withCredentials = true;
-        axios.post('https://ed808.com:92/latin/user/interests',
+        axios.post('https://temp.ed808.com/api/latin/user/interests',
           {
             topics : topics
           },
@@ -88,7 +88,7 @@
       getTopics(){
         axios.defaults.crossDomain = true;
         axios.defaults.withCredentials = true;
-        axios.get('https://ed808.com:92/latin/contents/list/topics',{},{
+        axios.get('https://temp.ed808.com/api/latin/contents/list/topics',{},{
           headers: {
             'Content-type': 'application/json',
           }
